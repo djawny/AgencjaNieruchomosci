@@ -29,7 +29,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
-        Log.d("Nieruchomosc", "Product id: " + productId);
+        Log.d(getClass().getSimpleName(), "Product id: " + productId);
 
 //        setupToolbar();
 //        displayData();
