@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.1.1_e4c42ec187d9e508ee1ea442682d75eeb325a291\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.1.1_c7dc6f8cc62af544a1e38e508bd7d4e80c902f61\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.1.1_5cd48206d6f7b7db6207fdb00c10be965b73a7cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.1.1_df90040b3c09be4f17ebbe2009515ba216ce9885\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.5.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="19f281a785ca0eb5f6799fc7bf7ca199a9ca1e8b">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.jakewharton-butterknife-8.5.1_d7a03120cd40a9ba063ccd459f0d5b4206dc373f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.1.1_d0e2514bb9e0e987023eb5d986b057e7068e88de\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.1.1_9673bc38170fc35062a68b116e0ed2249da53405\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.1.1_9dfc7dcb9b9f75d2fb8e31e032c938cc97618716\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7b984c868d30d957d6ecc3670054d309c198745b">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_d183cd98233aa4a5f7601345eba691094736c1be\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.1_6ca4ed690542b54a66a26ba2b49d4bfa6925eca6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.1.1_1ca0b4e6d98dcfaf8daab205622e1b0cc059d2c3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.5.1\bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc\butterknife-annotations-8.5.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bb67dad90bab7cd77a8f7f1b8442b47e3a2326bc">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-annotations-8.5.1_d8bb2574f2e865b3bb5f8931b4b3697105d410c2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.1.1_48f41f006fe45b478915626f653f827215a2ffa7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a8ae156c2726ac9c56daaf4b49452ec2cdb7bba9">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-25.1.1_d4addccad708340a52a2c879e308a690a6d458a6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="83a3df8bd5752c62aafc79f4cf3979d22d11f911">
+        <dex dex="C:\Users\RENT\Desktop\AgencjaNieruchomosci\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_adc08808ef645e3c75a9302fa193023558911053\classes.dex" />
+    </item>
+
+</items>
