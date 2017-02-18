@@ -3,6 +3,7 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ProductCardView extends CardView {
+
+    public interface ProductCardViewInterface {
+        void onProductClicked(Product product);
+    }
 
     @BindView(R.id.product_image)
     ImageView mProductImage;
@@ -43,9 +48,16 @@ public class ProductCardView extends CardView {
         ButterKnife.bind(this);
     }
 
-    public void bindTo(Product product) {
+    public void bindTo(final Product product, final ProductCardViewInterface productCardViewInterface) {
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
         mProductImage.setImageResource(product.getmImageResId());
+
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productCardViewInterface.onProductClicked(product);
+            }
+        });
     }
 }

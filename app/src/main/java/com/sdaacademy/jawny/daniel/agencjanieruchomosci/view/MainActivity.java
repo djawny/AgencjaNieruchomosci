@@ -3,6 +3,7 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
@@ -17,7 +18,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface {
 
     @BindViews({R.id.product_1, R.id.product_2, R.id.product_3})
     List<ProductCardView> mProductCardViews;
@@ -57,7 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < products.size(); i++) {
             Product product = products.get(i);
-            mProductCardViews.get(i).bindTo(product);
+            mProductCardViews.get(i).bindTo(product, this);
         }
+    }
+
+    @Override
+    public void onProductClicked(Product product) {
+        Log.d("Nieruchomosci", "Product clicked" + product.getmName());
     }
 }
