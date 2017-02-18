@@ -1,5 +1,6 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,9 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface {
+
+
+    public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
     @BindViews({R.id.product_1, R.id.product_2, R.id.product_3})
     List<ProductCardView> mProductCardViews;
@@ -64,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     @Override
     public void onProductClicked(Product product) {
-        Log.d("Nieruchomosci", "Product clicked" + product.getmName());
+        Intent intent = new Intent(this, ProductDetailsActivity.class);
+        intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
+        startActivity(intent);
+
+        Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
     }
 }

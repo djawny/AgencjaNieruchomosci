@@ -3,6 +3,7 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
@@ -11,6 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ProductDetailsActivity extends AppCompatActivity {
+
+    public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
     @BindView(R.id.product_image)
     ImageView mProductImage;
@@ -24,7 +27,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         ButterKnife.bind(this);
 
-
+        Bundle bundle = getIntent().getExtras();
+        int productId = bundle.getInt(INTENT_PRODUCT_ID);
+        Log.d("Nieruchomosc", "Product id: " + productId);
 
 //        setupToolbar();
 //        displayData();
