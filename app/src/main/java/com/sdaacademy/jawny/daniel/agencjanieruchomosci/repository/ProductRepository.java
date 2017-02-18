@@ -32,4 +32,11 @@ public class ProductRepository implements ProductRepositoryInterface {
     public List<Product> getProducts() {
         return new ArrayList<>(mProducts.values());
     }
+
+    @Override
+    public Product getProductById(int Id) {
+
+        //TODO uzupelnic
+        return null;
+    }
 }
