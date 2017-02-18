@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
         startActivity(intent);
-
         Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
     }
 }

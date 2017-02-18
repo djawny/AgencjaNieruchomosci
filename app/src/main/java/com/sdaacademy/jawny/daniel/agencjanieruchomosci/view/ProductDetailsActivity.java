@@ -31,6 +31,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
         Log.d(getClass().getSimpleName(), "Product id: " + productId);
 
+        //TODO uzupelnic
+
 //        setupToolbar();
 //        displayData();
     }
