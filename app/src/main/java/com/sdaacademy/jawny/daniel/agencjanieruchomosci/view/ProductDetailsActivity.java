@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +22,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
+    private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

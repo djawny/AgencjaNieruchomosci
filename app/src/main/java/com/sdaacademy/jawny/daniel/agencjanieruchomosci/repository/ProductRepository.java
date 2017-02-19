@@ -34,9 +34,7 @@ public class ProductRepository implements ProductRepositoryInterface {
     }
 
     @Override
-    public Product getProductById(int Id) {
-
-        //TODO uzupelnic
-        return null;
+    public Product getProductById(int id) {
+        return mProducts.get(id);
     }
 }
