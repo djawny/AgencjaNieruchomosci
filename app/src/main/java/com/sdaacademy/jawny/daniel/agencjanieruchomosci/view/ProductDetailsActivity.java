@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
 
@@ -34,11 +35,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
         Log.d(getClass().getSimpleName(), "Product id: " + productId);
-
-        //TODO uzupelnic
-
-//        setupToolbar();
-//        displayData();
+        displayData(productId);
     }
 
+    private void displayData(int productId) {
+        Product product = mProductRepository.getProductById(productId);
+        mProductImage.setImageResource(product.getmImageResId());
+    }
 }
