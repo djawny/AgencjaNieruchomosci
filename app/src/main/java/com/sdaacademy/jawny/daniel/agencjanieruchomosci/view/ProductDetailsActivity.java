@@ -1,5 +1,6 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(product.getmName());
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
     }
 
     @Override
