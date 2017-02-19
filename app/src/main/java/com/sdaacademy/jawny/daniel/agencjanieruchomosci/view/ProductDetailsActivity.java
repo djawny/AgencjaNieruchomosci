@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -39,9 +38,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
-        Log.d(getClass().getSimpleName(), "Product id: " + productId);
-        setupToolBar();
-        displayData(productId);
+        Product product = mProductRepository.getProduct(productId);
+        setDisplay(product);
+        setToolBar(product);
+    }
+
+    private void setDisplay(Product product) {
+        mProductImage.setImageResource(product.getmImageResId());
+    }
+
+    private void setToolBar(Product product) {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        collapsingToolbarLayout.setTitle(product.getmName());
     }
 
     @Override
@@ -52,18 +61,5 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void displayData(int productId) {
-        Product product = mProductRepository.getProduct(productId);
-        mProductImage.setImageResource(product.getmImageResId());
-    }
-
-    private void setupToolBar() {
-        setSupportActionBar(mToolbar);
-        mToolbar.setTitle("Nieruchomość");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        collapsingToolbarLayout.setTitle("Nieruchomość");
     }
 }
