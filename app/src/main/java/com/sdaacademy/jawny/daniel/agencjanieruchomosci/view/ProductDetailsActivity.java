@@ -35,11 +35,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
         Log.d(getClass().getSimpleName(), "Product id: " + productId);
+        setupToolBar();
         displayData(productId);
     }
 
     private void displayData(int productId) {
         Product product = mProductRepository.getProduct(productId);
         mProductImage.setImageResource(product.getmImageResId());
+    }
+
+    private void setupToolBar() {
+        setSupportActionBar(mToolbar);
+        mToolbar.setTitle("Nieruchomość");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
