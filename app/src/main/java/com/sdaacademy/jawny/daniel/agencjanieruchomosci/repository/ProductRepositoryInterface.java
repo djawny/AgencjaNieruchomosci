@@ -8,5 +8,5 @@ public interface ProductRepositoryInterface {
 
     List<Product> getProducts();
 
-    Product getProductById(int Id);
+    Product getProduct(int Id);
 }

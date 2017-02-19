@@ -39,7 +39,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void displayData(int productId) {
-        Product product = mProductRepository.getProductById(productId);
+        Product product = mProductRepository.getProduct(productId);
         mProductImage.setImageResource(product.getmImageResId());
     }
 }
