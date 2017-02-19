@@ -35,8 +35,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
         Log.d(getClass().getSimpleName(), "Product id: " + productId);
-        setupToolBar();
-        displayData(productId);
+        //setupToolBar();
+        //displayData(productId);
     }
 
     private void displayData(int productId) {
