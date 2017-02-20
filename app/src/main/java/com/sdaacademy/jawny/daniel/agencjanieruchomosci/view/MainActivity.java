@@ -1,11 +1,14 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
@@ -18,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface {
 
@@ -72,5 +76,11 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
         startActivity(intent);
         Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+    }
+
+    @OnClick(R.id.add_new_product)
+    public void onAddProductClicked(View view) {
+        Log.d(getClass().getSimpleName(), "New product click");
+        Toast.makeText(this, "New product click", Toast.LENGTH_SHORT).show();
     }
 }
