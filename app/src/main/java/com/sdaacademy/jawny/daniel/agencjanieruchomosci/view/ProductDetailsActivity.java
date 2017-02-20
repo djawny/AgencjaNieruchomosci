@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
@@ -29,6 +30,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout collapsingToolbarLayout;
 
+    @BindView(R.id.product_name)
+    TextView mProductName;
+
+    @BindView(R.id.product_price)
+    TextView mProductPrice;
+
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
 
     @Override
@@ -46,6 +53,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void setDisplay(Product product) {
         mProductImage.setImageResource(product.getmImageResId());
+        mProductName.setText(product.getmName());
+        mProductPrice.setText(String.valueOf(product.getmPrice()));
     }
 
     private void setToolBar(Product product) {
@@ -56,13 +65,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                onBackPressed();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
