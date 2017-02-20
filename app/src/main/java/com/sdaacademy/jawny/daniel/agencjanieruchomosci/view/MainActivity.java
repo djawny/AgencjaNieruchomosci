@@ -2,6 +2,7 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
+    @BindView(R.id.activity_main)
+    View mRootLayout;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
 
@@ -81,6 +85,16 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
         Log.d(getClass().getSimpleName(), "New product click");
+
         Toast.makeText(this, "New product click", Toast.LENGTH_SHORT).show();
+
+        Snackbar.make(mRootLayout,"Brak internetu",Snackbar.LENGTH_INDEFINITE)
+                .setAction("Dodaj lokalnie", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                })
+                .show();
     }
 }
