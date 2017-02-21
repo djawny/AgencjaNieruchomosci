@@ -85,18 +85,22 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
-        Log.d(getClass().getSimpleName(), "New product click");
+//        Log.d(getClass().getSimpleName(), "New product click");
+//
+//        Toast.makeText(this, "New product click", Toast.LENGTH_SHORT).show();
+//
+//        Snackbar.make(mRootLayout,"Brak internetu",Snackbar.LENGTH_INDEFINITE)
+//                .setAction("Odśwież", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                })
+//                .setActionTextColor(Color.GREEN)
+//                .show();
 
-        Toast.makeText(this, "New product click", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddProductActivity.class);
+        startActivity(intent);
 
-        Snackbar.make(mRootLayout,"Brak internetu",Snackbar.LENGTH_INDEFINITE)
-                .setAction("Dodaj lokalnie", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                })
-                .setActionTextColor(Color.GREEN)
-                .show();
     }
 }
