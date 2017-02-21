@@ -34,8 +34,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     @OnClick(R.id.add_button)
     public void onAddClick(View view) {
-
-
+        onBackPressed();
 
     }
 }

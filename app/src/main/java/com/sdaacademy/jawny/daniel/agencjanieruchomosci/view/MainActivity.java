@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
+
 //        Log.d(getClass().getSimpleName(), "New product click");
 //
 //        Toast.makeText(this, "New product click", Toast.LENGTH_SHORT).show();
@@ -101,6 +102,5 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
         Intent intent = new Intent(this, AddProductActivity.class);
         startActivity(intent);
-
     }
 }
