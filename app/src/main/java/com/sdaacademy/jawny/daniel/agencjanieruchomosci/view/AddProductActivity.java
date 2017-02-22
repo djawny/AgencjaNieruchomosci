@@ -20,9 +20,6 @@ public class AddProductActivity extends AppCompatActivity {
     @BindView(R.id.product_price)
     EditText mProductPrice;
 
-    @BindView(R.id.choose_date)
-    TextView mDate;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +27,14 @@ public class AddProductActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.choose_date)
-    public void onChooseDateClick(View view) {
-
-    }
-
     @OnClick(R.id.add_button)
     public void onAddClick(View view) {
+        String name = mProductName.getText().toString();
+        String price = mProductPrice.getText().toString();
+        if (!name.isEmpty() && !price.isEmpty()) {
 
-        onBackPressed();
+
+            onBackPressed();
+        }
     }
 }
