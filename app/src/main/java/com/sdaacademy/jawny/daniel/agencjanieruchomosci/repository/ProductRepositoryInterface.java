@@ -9,4 +9,6 @@ public interface ProductRepositoryInterface {
     List<Product> getProducts();
 
     Product getProduct(int id);
+
+    void addProduct(Product product);
 }

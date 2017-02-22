@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
 
@@ -35,7 +36,8 @@ public class AddProductActivity extends AppCompatActivity {
         String name = mProductName.getText().toString();
         String price = mProductPrice.getText().toString();
         if (!name.isEmpty() && !price.isEmpty()) {
-
+            Product product = new Product(mProductRepository.getProducts().size() + 1, name, Integer.parseInt(price), R.drawable.d3);
+            mProductRepository.addProduct(product);
             onBackPressed();
         }
     }

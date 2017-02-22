@@ -37,4 +37,9 @@ public class ProductRepository implements ProductRepositoryInterface {
     public Product getProduct(int id) {
         return mProducts.get(id);
     }
+
+    @Override
+    public void addProduct(Product product) {
+        mProducts.put(product.getmId(), product);
+    }
 }
