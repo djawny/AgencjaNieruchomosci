@@ -74,8 +74,10 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     @Override
     protected void onResume() {
         super.onResume();
+        products = mProductRepository.getProducts();
+        productAdapter.clear();
+        productAdapter.addAll(products);
         productAdapter.notifyDataSetChanged();
-
     }
 
     @Override
