@@ -24,7 +24,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface {
 
-
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
     @BindView(R.id.product_list)
