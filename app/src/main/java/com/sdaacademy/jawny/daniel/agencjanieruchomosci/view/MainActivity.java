@@ -10,12 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter.ProductAdapter;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView;
 
 import java.util.List;
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
-    @BindViews({R.id.product_1, R.id.product_2, R.id.product_3})
-    List<ProductCardView> mProductCardViews;
+    @BindView(R.id.product_list)
+    ListView mProductList;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     View mRootLayout;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
+
+    private ProductAdapter productAdapter;
+    private List<Product> products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +72,10 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     }
 
     private void displayData() {
-        List<Product> products = mProductRepository.getProducts();
-
-        for (int i = 0; i < products.size(); i++) {
-            Product product = products.get(i);
-            mProductCardViews.get(i).bindTo(product, this);
-        }
+        products = mProductRepository.getProducts();
+        productAdapter = new ProductAdapter(this, products);
+        mProductList.setAdapter(productAdapter);
+//        productAdapter.notifyDataSetChanged();
     }
 
     @Override

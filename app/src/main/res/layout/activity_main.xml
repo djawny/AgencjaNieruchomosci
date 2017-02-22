@@ -29,23 +29,14 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView
-            android:id="@+id/product_1"
+        <ListView
+            android:id="@+id/product_list"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="4dp" />
+            android:layout_height="wrap_content"
+            android:transcriptMode="alwaysScroll"
+            tools:listitem="@layout/row_layout">
 
-        <com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView
-            android:id="@+id/product_2"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="4dp" />
-
-        <com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView
-            android:id="@+id/product_3"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="4dp" />
+        </ListView>
 
     </LinearLayout>
 
