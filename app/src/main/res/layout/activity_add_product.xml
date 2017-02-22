@@ -42,6 +42,16 @@
             android:text="Dodaj"
             android:textColor="@android:color/white" />
 
+        <Button
+            android:id="@+id/chancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_margin="8dp"
+            android:background="@color/colorPrimary"
+            android:text="Anuluj"
+            android:textColor="@android:color/white" />
+
     </FrameLayout>
 
 </LinearLayout>

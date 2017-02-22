@@ -37,4 +37,8 @@ public class AddProductActivity extends AppCompatActivity {
             onBackPressed();
         }
     }
+    @OnClick(R.id.chancel_button)
+    public void onChancelClick(View view) {
+            onBackPressed();
+    }
 }
