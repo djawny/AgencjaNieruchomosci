@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +20,8 @@ public class AddProductActivity extends AppCompatActivity {
 
     @BindView(R.id.product_price)
     EditText mProductPrice;
+
+    private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
