@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 
@@ -39,6 +38,6 @@ public class AddProductActivity extends AppCompatActivity {
 
     @OnClick(R.id.chancel_button)
     public void onChancelClick(View view) {
-            onBackPressed();
+        onBackPressed();
     }
 }
