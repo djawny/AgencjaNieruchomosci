@@ -33,10 +33,10 @@ public class AddProductActivity extends AppCompatActivity {
         String price = mProductPrice.getText().toString();
         if (!name.isEmpty() && !price.isEmpty()) {
 
-
             onBackPressed();
         }
     }
+
     @OnClick(R.id.chancel_button)
     public void onChancelClick(View view) {
             onBackPressed();
