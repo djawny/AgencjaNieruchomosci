@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                android.os.Process.killProcess(android.os.Process.myPid());
                 return true;
         }
         return super.onOptionsItemSelected(item);
