@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class DatabaseImpl extends SQLiteOpenHelper implements Database {
@@ -55,14 +56,20 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     @Override
     public void saveProducts(List<Product> products) {
         SQLiteDatabase db = getWritableDatabase();
-        for (Product product : products) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(ID, product.getmId());
-            contentValues.put(NAME, product.getmName());
-            contentValues.put(PRICE, product.getmPrice());
-            contentValues.put(IMAGE_NAME, product.getmImageName());
-            long id = db.insert(PRODUCTS, null, contentValues);
-            Log.i(DATABASE, "" + id);
+        try {
+            db.beginTransaction();
+            for (Product product : products) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(ID, product.getmId());
+                contentValues.put(NAME, product.getmName());
+                contentValues.put(PRICE, product.getmPrice());
+                contentValues.put(IMAGE_NAME, product.getmImageName());
+                long id = db.insert(PRODUCTS, null, contentValues);
+                Log.i(DATABASE, "" + id);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
     }
 }
