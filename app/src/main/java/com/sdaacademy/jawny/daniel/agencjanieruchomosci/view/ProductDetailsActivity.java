@@ -52,7 +52,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void setDisplay(Product product) {
-        mProductImage.setImageResource(product.getmImageResId());
+//        mProductImage.setImageResource(product.getmImage());
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
     }

@@ -36,7 +36,7 @@ public class AddProductActivity extends AppCompatActivity {
         String name = mProductName.getText().toString();
         String price = mProductPrice.getText().toString();
         if (!name.isEmpty() && !price.isEmpty()) {
-            Product product = new Product(mProductRepository.getProducts().size() + 1, name, Integer.parseInt(price), R.drawable.d3);
+            Product product = new Product(mProductRepository.getProducts().size() + 1, name, Integer.parseInt(price), "d3");
             mProductRepository.addProduct(product);
             finish();
         }

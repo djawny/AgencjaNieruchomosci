@@ -51,7 +51,7 @@ public class ProductCardView extends CardView {
     public void bindTo(final Product product, final ProductCardViewInterface productCardViewInterface) {
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
-        mProductImage.setImageResource(product.getmImageResId());
+//        mProductImage.setImageResource(product.getmImage());
 
         setOnClickListener(new OnClickListener() {
             @Override

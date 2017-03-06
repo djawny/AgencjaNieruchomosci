@@ -5,13 +5,13 @@ public class Product {
     private int mId;
     private String mName;
     private int mPrice;
-    private int mImageResId;
+    private String mImage;
 
-    public Product(int mId, String mName, int mPrice, int mImageResId) {
+    public Product(int mId, String mName, int mPrice, String mImage) {
         this.mId = mId;
         this.mName = mName;
         this.mPrice = mPrice;
-        this.mImageResId = mImageResId;
+        this.mImage = mImage;
     }
 
     public int getmId() {
@@ -26,7 +26,7 @@ public class Product {
         return mPrice;
     }
 
-    public int getmImageResId() {
-        return mImageResId;
+    public String getmImage() {
+        return mImage;
     }
 }
