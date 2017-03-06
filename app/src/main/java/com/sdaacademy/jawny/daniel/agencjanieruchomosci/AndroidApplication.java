@@ -13,6 +13,7 @@ public class AndroidApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mDatabase = new DatabaseImpl(this);
+        ((DatabaseImpl) mDatabase).getWritableDatabase();
     }
 
     public static Database getmDatabase() {
