@@ -35,8 +35,8 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//        db.execSQL(DROP_TODO_TABLE);
+//        onCreate(db);
 //        db.execSQL(ADD_COLUMN);
-        db.execSQL(DROP_TODO_TABLE);
-        onCreate(db);
     }
 }
