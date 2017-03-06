@@ -47,8 +47,8 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        db.execSQL(DROP_TODO_TABLE);
-//        onCreate(db);
+        db.execSQL(DROP_TODO_TABLE);
+        onCreate(db);
 //        db.execSQL(ADD_COLUMN);
     }
 
@@ -61,7 +61,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
             contentValues.put(NAME, product.getmName());
             contentValues.put(PRICE, product.getmPrice());
             contentValues.put(IMAGE_NAME, product.getmImageName());
-            long id = db.insertOrThrow(PRODUCTS, null, contentValues);
+            long id = db.insert(PRODUCTS, null, contentValues);
             Log.i(DATABASE, "" + id);
         }
     }
