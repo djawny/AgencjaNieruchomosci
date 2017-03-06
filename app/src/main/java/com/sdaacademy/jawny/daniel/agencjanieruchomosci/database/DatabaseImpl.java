@@ -55,14 +55,14 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     @Override
     public void saveProducts(List<Product> products) {
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
         for (Product product : products) {
+            ContentValues contentValues = new ContentValues();
             contentValues.put(ID, product.getmId());
             contentValues.put(NAME, product.getmName());
             contentValues.put(PRICE, product.getmPrice());
             contentValues.put(IMAGE_NAME, product.getmImageName());
+            long id = db.insertOrThrow(PRODUCTS, null, contentValues);
+            Log.i(DATABASE, "" + id);
         }
-        long id = db.insertOrThrow(PRODUCTS, null, contentValues);
-        Log.i(DATABASE, "" + id);
     }
 }
