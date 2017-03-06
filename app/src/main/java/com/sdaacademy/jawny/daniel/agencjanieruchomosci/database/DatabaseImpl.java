@@ -2,13 +2,14 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseImpl extends SQLiteOpenHelper implements Database {
@@ -71,5 +72,34 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         } finally {
             db.endTransaction();
         }
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        List<Product> products = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(PRODUCTS, null, null, null, null, null, null);
+        cursor.moveToFirst();
+        do {
+            int idColumnIndex = cursor.getColumnIndex(ID);
+            int id = cursor.getInt(idColumnIndex);
+
+            int nameColumnIndex = cursor.getColumnIndex(NAME);
+            String name = cursor.getString(nameColumnIndex);
+
+            int priceColumnIndex = cursor.getColumnIndex(PRICE);
+            int price = cursor.getInt(priceColumnIndex);
+
+            int imageNameColumnIndex = cursor.getColumnIndex(IMAGE_NAME);
+            String imageName = cursor.getString(imageNameColumnIndex);
+
+            Product product = new Product(id, name, price, imageName);
+            products.add(product);
+
+        } while (cursor.moveToNext());
+        cursor.close();
+
+        return products;
     }
 }

@@ -44,7 +44,8 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public List<Product> getProducts() {
-        return new ArrayList<>(mProducts.values());
+//        return new ArrayList<>(mProducts.values());
+        return mDatabase.getProducts();
     }
 
     @Override
