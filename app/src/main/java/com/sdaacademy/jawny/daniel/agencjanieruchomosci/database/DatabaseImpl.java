@@ -17,6 +17,12 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
                     "imageName TEXT" +
                     ");";
 
+    private static final String DROP_TODO_TABLE =
+            "DROP TABLE IF EXISTS products";
+
+    private static final String ADD_COLUMN =
+            "ALTER TABLE products"
+                    + "ADD test TEXT";
 
     public DatabaseImpl(Context context) {
         super(context, NAME, null, VERSION);
@@ -29,6 +35,8 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+//        db.execSQL(ADD_COLUMN);
+        db.execSQL(DROP_TODO_TABLE);
+        onCreate(db);
     }
 }
