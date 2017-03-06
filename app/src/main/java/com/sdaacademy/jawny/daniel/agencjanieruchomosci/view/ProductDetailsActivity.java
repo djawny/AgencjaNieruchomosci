@@ -52,7 +52,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void setDisplay(Product product) {
-        int drawableResourceId = this.getResources().getIdentifier(product.getmImage(), "drawable", getPackageName());
+        int drawableResourceId = this.getResources().getIdentifier(product.getmImageName(), "drawable", getPackageName());
         mProductImage.setImageResource(drawableResourceId);
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
