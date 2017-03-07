@@ -9,4 +9,8 @@ public interface Database {
     void saveProducts(List<Product> products);
 
     List<Product> getProducts();
+
+    Product getProduct(int productId);
+
+    void addProduct(Product product);
 }

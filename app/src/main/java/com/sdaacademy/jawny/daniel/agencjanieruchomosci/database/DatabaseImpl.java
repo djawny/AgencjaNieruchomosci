@@ -102,4 +102,33 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
         return products;
     }
+
+    @Override
+    public Product getProduct(int productId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(PRODUCTS, null, "id = ?", new String[]{String.valueOf(productId)}
+                , null, null, null);
+        cursor.moveToFirst();
+        Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3));
+        cursor.close();
+        return product;
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            db.beginTransaction();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(ID, product.getmId());
+            contentValues.put(NAME, product.getmName());
+            contentValues.put(PRICE, product.getmPrice());
+            contentValues.put(IMAGE_NAME, product.getmImageName());
+            long id = db.insert(PRODUCTS, null, contentValues);
+            Log.i(DATABASE, "" + id);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
 }

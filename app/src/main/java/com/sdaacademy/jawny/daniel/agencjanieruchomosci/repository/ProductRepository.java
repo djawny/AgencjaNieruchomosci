@@ -13,7 +13,6 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     private static ProductRepository mInstance = new ProductRepository();
 
-    private Map<Integer, Product> mProducts = new HashMap<>();
 
     private final Database mDatabase;
 
@@ -32,10 +31,6 @@ public class ProductRepository implements ProductRepositoryInterface {
         products.add(product3);
 
         mDatabase.saveProducts(products);
-
-        mProducts.put(1, product1);
-        mProducts.put(2, product2);
-        mProducts.put(3, product3);
     }
 
     public static ProductRepositoryInterface getInstance() {
@@ -44,17 +39,16 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public List<Product> getProducts() {
-//        return new ArrayList<>(mProducts.values());
         return mDatabase.getProducts();
     }
 
     @Override
     public Product getProduct(int id) {
-        return mProducts.get(id);
+        return mDatabase.getProduct(id);
     }
 
     @Override
     public void addProduct(Product product) {
-        mProducts.put(product.getmId(), product);
+        mDatabase.addProduct(product);
     }
 }
