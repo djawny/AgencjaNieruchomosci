@@ -44,7 +44,7 @@ public class ProductRepository implements ProductRepositoryInterface {
     }
 
     @Override
-    public void addProduct(String name,int price) {
-        mDatabase.saveProduct(name,price);
+    public void addProduct(String name, int price) {
+        mDatabase.saveProduct(name, price);
     }
 }
