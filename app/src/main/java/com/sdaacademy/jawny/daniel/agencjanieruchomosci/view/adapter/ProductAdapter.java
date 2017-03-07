@@ -1,6 +1,7 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,8 @@ import java.util.List;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
 
-    public ProductAdapter(Context context, List<Product> objects) {
-        super(context, R.layout.row_layout, objects);
+    public ProductAdapter(@NonNull Context context, @LayoutRes int resource) {
+        super(context, resource);
     }
 
     @NonNull

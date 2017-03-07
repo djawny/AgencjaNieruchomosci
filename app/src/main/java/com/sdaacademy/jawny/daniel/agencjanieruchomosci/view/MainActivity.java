@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupToolBar();
-        displayData();
+        setListViewAdapter();
     }
 
     @Override
@@ -65,9 +65,10 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void displayData() {
+    private void setListViewAdapter() {
         products = mProductRepository.getProducts();
-        productAdapter = new ProductAdapter(this, products);
+        productAdapter = new ProductAdapter(this, R.layout.row_layout);
+        productAdapter.addAll(products);
         mProductList.setAdapter(productAdapter);
     }
 
@@ -77,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         products = mProductRepository.getProducts();
         productAdapter.clear();
         productAdapter.addAll(products);
-        productAdapter.notifyDataSetChanged();
     }
 
     @Override
