@@ -64,6 +64,7 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
     @Override
     public Product getProduct(int productId) {
         return mProductDao.queryForId(productId);
+
 //        try {
 //            QueryBuilder<Product, Integer> query = mProductDao.queryBuilder();
 //            Where where = query.where();
@@ -72,11 +73,11 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
+
     }
 
     @Override
     public void saveProduct(String name, int price) {
-        Product product = new Product(0, name, price, "");
-        mProductDao.createIfNotExists(product);
+        mProductDao.createIfNotExists(new Product(0, name, price, null));
     }
 }
