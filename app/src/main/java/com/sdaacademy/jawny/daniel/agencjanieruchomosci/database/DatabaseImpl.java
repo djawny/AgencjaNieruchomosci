@@ -26,7 +26,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     private static final String DB_CREATE_TODO_TABLE =
             "CREATE TABLE products(" +
-                    "id INTEGER PRIMARY KEY," +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT NOT NULL," +
                     "price INTEGER DEFAULT 0," +
                     "imageName TEXT" +
@@ -61,7 +61,6 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
             db.beginTransaction();
             for (Product product : products) {
                 ContentValues contentValues = new ContentValues();
-                contentValues.put(ID, product.getmId());
                 contentValues.put(NAME, product.getmName());
                 contentValues.put(PRICE, product.getmPrice());
                 contentValues.put(IMAGE_NAME, product.getmImageName());
@@ -120,7 +119,6 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         try {
             db.beginTransaction();
             ContentValues contentValues = new ContentValues();
-            contentValues.put(ID, product.getmId());
             contentValues.put(NAME, product.getmName());
             contentValues.put(PRICE, product.getmPrice());
             contentValues.put(IMAGE_NAME, product.getmImageName());
