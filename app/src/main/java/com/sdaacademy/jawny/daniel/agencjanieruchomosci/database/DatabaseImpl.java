@@ -27,7 +27,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     private static final String DB_CREATE_TODO_TABLE =
             "CREATE TABLE products(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "name TEXT NOT NULL," +
+                    "name TEXT NOT NULL UNIQUE," +
                     "price INTEGER DEFAULT 0," +
                     "imageName TEXT DEFAULT d3" +
                     ");";
