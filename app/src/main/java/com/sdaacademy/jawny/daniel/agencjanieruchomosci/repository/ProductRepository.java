@@ -26,7 +26,9 @@ public class ProductRepository implements ProductRepositoryInterface {
         products.add(product2);
         products.add(product3);
 
-        mDatabase.saveProducts(products);
+        if (mDatabase.getProducts().size() == 0) {
+            mDatabase.saveProducts(products);
+        }
     }
 
     public static ProductRepositoryInterface getInstance() {
