@@ -12,5 +12,5 @@ public interface Database {
 
     Product getProduct(int productId);
 
-    void saveProduct(Product product);
+    void saveProduct(String name, int price);
 }

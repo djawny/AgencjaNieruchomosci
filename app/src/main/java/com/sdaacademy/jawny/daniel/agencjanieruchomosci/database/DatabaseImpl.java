@@ -29,7 +29,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "name TEXT NOT NULL," +
                     "price INTEGER DEFAULT 0," +
-                    "imageName TEXT" +
+                    "imageName TEXT DEFAULT d3" +
                     ");";
 
     private static final String DROP_TODO_TABLE =
@@ -114,14 +114,13 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     }
 
     @Override
-    public void saveProduct(Product product) {
+    public void saveProduct(String name, int price) {
         SQLiteDatabase db = getWritableDatabase();
         try {
             db.beginTransaction();
             ContentValues contentValues = new ContentValues();
-            contentValues.put(NAME, product.getmName());
-            contentValues.put(PRICE, product.getmPrice());
-            contentValues.put(IMAGE_NAME, product.getmImageName());
+            contentValues.put(NAME, name);
+            contentValues.put(PRICE, price);
             long id = db.insert(PRODUCTS, null, contentValues);
             Log.i(DATABASE, "" + id);
             db.setTransactionSuccessful();
