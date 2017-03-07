@@ -32,9 +32,9 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.add_button)
-    public void onAddClick(View view) {
-        String name = mProductName.getText().toString();
-        String price = mProductPrice.getText().toString();
+    public void onAddClicked(View view) {
+        String name = mProductName.getText().toString().trim();
+        String price = mProductPrice.getText().toString().trim();
         if (!name.isEmpty() && !price.isEmpty()) {
             Product product = new Product(mProductRepository.getProducts().size() + 1, name, Integer.parseInt(price), "d3");
             mProductRepository.addProduct(product);
@@ -43,7 +43,7 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.chancel_button)
-    public void onChancelClick(View view) {
+    public void onChancelClicked(View view) {
         onBackPressed();
     }
 }
