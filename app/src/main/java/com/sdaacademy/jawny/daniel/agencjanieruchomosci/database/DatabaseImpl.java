@@ -115,7 +115,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void saveProduct(Product product) {
         SQLiteDatabase db = getWritableDatabase();
         try {
             db.beginTransaction();

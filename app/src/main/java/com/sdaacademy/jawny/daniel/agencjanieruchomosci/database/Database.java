@@ -12,5 +12,5 @@ public interface Database {
 
     Product getProduct(int productId);
 
-    void addProduct(Product product);
+    void saveProduct(Product product);
 }

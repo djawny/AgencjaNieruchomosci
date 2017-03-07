@@ -5,14 +5,11 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.database.Database;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProductRepository implements ProductRepositoryInterface {
 
     private static ProductRepository mInstance = new ProductRepository();
-
 
     private final Database mDatabase;
 
@@ -49,6 +46,6 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public void addProduct(Product product) {
-        mDatabase.addProduct(product);
+        mDatabase.saveProduct(product);
     }
 }
