@@ -14,7 +14,6 @@ public class AndroidApplication extends Application {
     public void onCreate() {
         super.onCreate();
 //        mDatabase = new DatabaseSQLiteImpl(this);
-//        ((DatabaseSQLiteImpl) mDatabase).getWritableDatabase();
         mDatabase = OpenHelperManager.getHelper(this, DatabaseOrmImpl.class);
     }
 

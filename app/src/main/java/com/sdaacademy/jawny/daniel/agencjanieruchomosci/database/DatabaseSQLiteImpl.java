@@ -19,9 +19,9 @@ public class DatabaseSQLiteImpl extends SQLiteOpenHelper implements Database {
     private static final String PRICE = "price";
     private static final String IMAGE_NAME = "imageName";
     private static final String PRODUCTS = "products";
-    private static final String DATABASE = "database";
+    private static final String DATABASE = "databaseSQLite";
 
-    private final static String DB_NAME = "database.db";
+    private final static String DB_NAME = "databaseSQLite.db";
     private final static int DB_VERSION = 1;
 
     private static final String DB_CREATE_TODO_TABLE =
