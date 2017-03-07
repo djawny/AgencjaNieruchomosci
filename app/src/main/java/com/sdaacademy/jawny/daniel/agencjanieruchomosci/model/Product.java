@@ -3,8 +3,10 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 @DatabaseTable(tableName = Product.TABLE_NAME)
-public class Product {
+public class Product implements Serializable{
 
     static final String TABLE_NAME = "products";
 
