@@ -2,8 +2,9 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci;
 
 import android.app.Application;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.database.Database;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.database.DatabaseImpl;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.database.DatabaseOrmImpl;
 
 public class AndroidApplication extends Application {
 
@@ -12,8 +13,9 @@ public class AndroidApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mDatabase = new DatabaseImpl(this);
-        ((DatabaseImpl) mDatabase).getWritableDatabase();
+//        mDatabase = new DatabaseSQLiteImpl(this);
+//        ((DatabaseSQLiteImpl) mDatabase).getWritableDatabase();
+        mDatabase = OpenHelperManager.getHelper(this, DatabaseOrmImpl.class);
     }
 
     public static Database getmDatabase() {

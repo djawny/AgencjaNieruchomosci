@@ -12,7 +12,7 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseImpl extends SQLiteOpenHelper implements Database {
+public class DatabaseSQLiteImpl extends SQLiteOpenHelper implements Database {
 
     private static final String ID = "id";
     private static final String NAME = "name";
@@ -38,7 +38,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
             "ALTER TABLE products"
                     + "ADD test TEXT";
 
-    public DatabaseImpl(Context context) {
+    public DatabaseSQLiteImpl(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
