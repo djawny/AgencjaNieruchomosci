@@ -63,18 +63,16 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
 
     @Override
     public Product getProduct(int productId) {
-//        return mProductDao.queryForId(productId);
-
-        try {
-            QueryBuilder<Product, Integer> query = mProductDao.queryBuilder();
-            Where where = query.where();
-            where.eq("id", productId);
-            return query.queryForFirst();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return mProductDao.queryForId(productId);
+//        try {
+//            QueryBuilder<Product, Integer> query = mProductDao.queryBuilder();
+//            Where where = query.where();
+//            where.eq("id", productId);
+//            return query.queryForFirst();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
     }
 
     @Override
