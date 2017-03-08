@@ -107,7 +107,21 @@ public class DatabaseSQLiteImpl extends SQLiteOpenHelper implements Database {
         Cursor cursor = db.query(PRODUCTS, null, "id = ?", new String[]{String.valueOf(productId)}
                 , null, null, null);
         cursor.moveToFirst();
-        Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3));
+
+        int idColumnIndex = cursor.getColumnIndex(ID);
+        int id = cursor.getInt(idColumnIndex);
+
+        int nameColumnIndex = cursor.getColumnIndex(NAME);
+        String name = cursor.getString(nameColumnIndex);
+
+        int priceColumnIndex = cursor.getColumnIndex(PRICE);
+        int price = cursor.getInt(priceColumnIndex);
+
+        int imageNameColumnIndex = cursor.getColumnIndex(IMAGE_NAME);
+        String imageName = cursor.getString(imageNameColumnIndex);
+
+        Product product = new Product(id, name, price, imageName);
+
         cursor.close();
         return product;
     }
