@@ -77,6 +77,6 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
 
     @Override
     public void saveProduct(String name, int price) {
-        mProductDao.createIfNotExists(new Product(name, price));
+        mProductDao.create(new Product(name, price));
     }
 }
