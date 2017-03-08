@@ -17,9 +17,9 @@ public class ProductRepository implements ProductRepositoryInterface {
 
         mDatabase = AndroidApplication.getmDatabase();
 
-        Product product1 = new Product(1, "dom 1", 1000, "d1");
-        Product product2 = new Product(2, "dom 2", 2000, "d2");
-        Product product3 = new Product(3, "dom 3", 3000, "d3");
+        Product product1 = new Product("dom 1", 1000, "d1");
+        Product product2 = new Product("dom 2", 2000, "d2");
+        Product product3 = new Product("dom 3", 3000, "d3");
 
         List<Product> products = new ArrayList<>();
         products.add(product1);
