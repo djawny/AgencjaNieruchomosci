@@ -19,7 +19,6 @@ public class DatabaseSQLiteImpl extends SQLiteOpenHelper implements Database {
     private static final String PRICE = "price";
     private static final String IMAGE_NAME = "imageName";
     private static final String PRODUCTS = "products";
-    private static final String DATABASE = "databaseSQLite";
 
     private final static String DB_NAME = "databaseSQLite.db";
     private final static int DB_VERSION = 1;
@@ -65,7 +64,7 @@ public class DatabaseSQLiteImpl extends SQLiteOpenHelper implements Database {
                 contentValues.put(PRICE, product.getmPrice());
                 contentValues.put(IMAGE_NAME, product.getmImageName());
                 long id = db.insert(PRODUCTS, null, contentValues);
-                Log.i(DATABASE, "" + id);
+                Log.i(DB_NAME, "" + id);
             }
             db.setTransactionSuccessful();
         } finally {
@@ -122,7 +121,7 @@ public class DatabaseSQLiteImpl extends SQLiteOpenHelper implements Database {
             contentValues.put(NAME, name);
             contentValues.put(PRICE, price);
             long id = db.insert(PRODUCTS, null, contentValues);
-            Log.i(DATABASE, "" + id);
+            Log.i(DB_NAME, "" + id);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

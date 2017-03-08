@@ -17,9 +17,8 @@ import java.util.List;
 
 public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database {
 
-    private final static String DB_NAME = "databaseOrm";
+    private final static String DB_NAME = "databaseOrmLite.db";
     private final static int DB_VERSION = 1;
-    private static final String ORM_LITE_DATABASE = "OrmLiteDatabase";
 
     private RuntimeExceptionDao<Product, Integer> mProductDao;
 
@@ -34,7 +33,7 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
         try {
             TableUtils.createTableIfNotExists(connectionSource, Product.class);
         } catch (SQLException e) {
-            Log.e(ORM_LITE_DATABASE, "Error onCreate", e);
+            Log.e(DB_NAME, "Error onCreate", e);
             e.printStackTrace();
         }
     }
@@ -44,7 +43,7 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
         try {
             TableUtils.dropTable(connectionSource, Product.class, true);
         } catch (SQLException e) {
-            Log.e(ORM_LITE_DATABASE, "Error onUpgrade", e);
+            Log.e(DB_NAME, "Error onUpgrade", e);
             e.printStackTrace();
         }
     }
