@@ -23,15 +23,15 @@ import butterknife.ButterKnife;
 public class TestStorageActivity extends AppCompatActivity {
 
     @BindView(R.id.files_dir)
-    TextView mText1;
+    TextView mFilesDir;
 
     @BindView(R.id.cache_dir)
-    TextView mText2;
+    TextView mCacheDir;
 
     @BindView(R.id.file)
     TextView mFile;
 
-    @BindView(R.id.image_from_file)
+    @BindView(R.id.image)
     ImageView mImage;
 
     @Override
@@ -43,14 +43,16 @@ public class TestStorageActivity extends AppCompatActivity {
         setup();
 
         String fileName = "myfile";
-        writeFile(fileName);
-        readFile(fileName);
+        String string = "Hello world!";
+        writeToFile(fileName, string);
+        readFromFile(fileName);
+
         fileName = "myImage";
-        saveImage(fileName);
-        openImage(fileName);
+        saveImageToFile(fileName);
+        setImage(fileName);
     }
 
-    private void openImage(String fileName) {
+    private void setImage(String fileName) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -61,7 +63,7 @@ public class TestStorageActivity extends AppCompatActivity {
         }
     }
 
-    private void saveImage(String fileName) {
+    private void saveImageToFile(String fileName) {
         FileOutputStream outputStream;
         try {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.d1);
@@ -72,7 +74,7 @@ public class TestStorageActivity extends AppCompatActivity {
         }
     }
 
-    private void readFile(String fileName) {
+    private void readFromFile(String fileName) {
         FileInputStream inputStream;
         String fileAsString;
         try {
@@ -91,11 +93,8 @@ public class TestStorageActivity extends AppCompatActivity {
         }
     }
 
-    private void writeFile(String fileName) {
-
-        String string = "Hello world!";
+    private void writeToFile(String fileName, String string) {
         FileOutputStream outputStream;
-
         try {
             outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
             outputStream.write(string.getBytes());
@@ -106,7 +105,7 @@ public class TestStorageActivity extends AppCompatActivity {
     }
 
     private void setup() {
-        mText1.setText("Internal Dir: " + getFilesDir().getAbsolutePath());
-        mText2.setText("Cache Dir: " + getCacheDir().getAbsolutePath());
+        mFilesDir.setText("Internal Dir: " + getFilesDir().getAbsolutePath());
+        mCacheDir.setText("Cache Dir: " + getCacheDir().getAbsolutePath());
     }
 }
