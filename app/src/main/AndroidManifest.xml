@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".view.ProductDetailsActivity" />
         <activity android:name=".view.AddProductActivity" />
+        <activity android:name=".view.TestStorageActivity"></activity>
     </application>
 
 </manifest>
