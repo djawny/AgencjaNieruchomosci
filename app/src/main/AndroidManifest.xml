@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sdaacademy.jawny.daniel.agencjanieruchomosci">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AndroidApplication"
@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".view.ProductDetailsActivity" />
         <activity android:name=".view.AddProductActivity" />
-        <activity android:name=".view.TestStorageActivity"></activity>
+        <activity android:name=".view.TestStorageActivity" />
+        <activity android:name=".view.FragmentTestActivity"></activity>
     </application>
 
 </manifest>
