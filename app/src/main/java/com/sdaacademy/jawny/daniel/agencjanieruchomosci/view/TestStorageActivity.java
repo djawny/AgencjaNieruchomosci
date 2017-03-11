@@ -49,6 +49,13 @@ public class TestStorageActivity extends AppCompatActivity {
     @BindView(R.id.string)
     EditText mString;
 
+    SharedPreferences.OnSharedPreferenceChangeListener mListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            Toast.makeText(TestStorageActivity.this, sharedPreferences.getString(key, null), Toast.LENGTH_SHORT).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +76,20 @@ public class TestStorageActivity extends AppCompatActivity {
         fileName = "myObject";
         saveObjectToFile(fileName);
         readObjectFromFile(fileName);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(mListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(mListener);
     }
 
     @OnClick({R.id.save_share_preferences, R.id.read_share_preferences})
