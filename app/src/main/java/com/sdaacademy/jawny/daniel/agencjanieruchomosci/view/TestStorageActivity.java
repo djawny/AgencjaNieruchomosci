@@ -64,8 +64,9 @@ public class TestStorageActivity extends AppCompatActivity {
 
     private void readObjectFromFile(String fileName) {
         Product product;
+        FileInputStream fileInputStream;
         try {
-            FileInputStream fileInputStream = openFileInput(fileName);
+            fileInputStream = openFileInput(fileName);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             product = (Product) objectInputStream.readObject();
             mObject.setText(product.toString());
@@ -77,9 +78,10 @@ public class TestStorageActivity extends AppCompatActivity {
     }
 
     private void saveObjectToFile(String fileName) {
+        Product product = new Product(1, "dom1", 9999, "d1");
+        ObjectOutputStream objectOutputStream;
         try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(openFileOutput(fileName, Context.MODE_PRIVATE));
-            Product product = new Product(1, "dom1", 9999, "d1");
+            objectOutputStream = new ObjectOutputStream(openFileOutput(fileName, Context.MODE_PRIVATE));
             objectOutputStream.writeObject(product);
             objectOutputStream.close();
         } catch (IOException e) {
