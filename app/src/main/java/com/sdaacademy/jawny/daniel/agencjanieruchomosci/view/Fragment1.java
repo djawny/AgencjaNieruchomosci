@@ -47,6 +47,7 @@ public class Fragment1 extends Fragment {
     }
 
     public void duplicate() {
-
+        final String text = mNameTextView.getText().toString() + mNameTextView.getText().toString();
+        mNameTextView.setText(text);
     }
 }
