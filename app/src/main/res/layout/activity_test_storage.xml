@@ -56,21 +56,28 @@
                 android:hint="Wprowadz tekst"
                 android:padding="8dp" />
 
-            <Button
-                android:id="@+id/save_share_preferences"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="8dp"
-                android:text="zapisz" />
+                android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/read_share_preferences"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="8dp"
-                android:text="odczyt" />
+                <Button
+                    android:id="@+id/save_share_preferences"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:padding="8dp"
+                    android:text="zapisz" />
+
+                <Button
+                    android:id="@+id/read_share_preferences"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:padding="8dp"
+                    android:text="odczytaj" />
+
+            </FrameLayout>
 
         </LinearLayout>
 

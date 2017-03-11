@@ -30,7 +30,7 @@ import butterknife.OnClick;
 
 public class TestStorageActivity extends AppCompatActivity {
 
-    public static final String STRING = "string";
+    public static final String KEY = "string";
     @BindView(R.id.files_dir)
     TextView mFilesDir;
 
@@ -87,15 +87,15 @@ public class TestStorageActivity extends AppCompatActivity {
 
     private void readSharePreferences() {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        String string = sharedPreferences.getString(STRING, null);
-        Toast.makeText(this, string, Toast.LENGTH_SHORT);
+        String string = sharedPreferences.getString(KEY, null);
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
 
     private void saveSharePreferences() {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String string = mString.getText().toString();
-        editor.putString(STRING, string);
+        editor.putString(KEY, string);
         editor.apply();
     }
 
