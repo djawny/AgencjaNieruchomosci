@@ -8,13 +8,20 @@
     tools:context="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.TestStorageActivity">
 
     <TextView
-        android:id="@+id/text1"
+        android:id="@+id/files_dir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp" />
 
     <TextView
-        android:id="@+id/text2"
+        android:id="@+id/cache_dir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/file"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
