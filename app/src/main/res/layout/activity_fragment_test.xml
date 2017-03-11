@@ -6,10 +6,10 @@
     android:id="@+id/activity_fragment_test"
     tools:context="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.FragmentTestActivity">
 
-    <!--<fragment-->
-        <!--android:id="@+id/fragment_1"-->
-        <!--android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.Fragment1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+    <fragment
+        android:id="@+id/fragment_1"
+        android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.Fragment1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

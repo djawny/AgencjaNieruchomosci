@@ -45,4 +45,8 @@ public class Fragment1 extends Fragment {
             mNameTextView.setText(name);
         }
     }
+
+    public void duplicate() {
+
+    }
 }
