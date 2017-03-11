@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 
 @DatabaseTable(tableName = Product.TABLE_NAME)
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     static final String TABLE_NAME = "products";
 
@@ -23,6 +23,20 @@ public class Product implements Serializable{
     private String mImageName;
 
     public Product() {
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Id= ");
+        stringBuilder.append(mId);
+        stringBuilder.append("\nName= ");
+        stringBuilder.append(mName);
+        stringBuilder.append("\nPrice= ");
+        stringBuilder.append(mPrice);
+        stringBuilder.append("\nImageName= ");
+        stringBuilder.append(mImageName);
+        return stringBuilder.toString();
     }
 
     public Product(String mName, int mPrice) {

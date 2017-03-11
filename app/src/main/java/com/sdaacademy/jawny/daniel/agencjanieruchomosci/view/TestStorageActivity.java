@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -16,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +37,9 @@ public class TestStorageActivity extends AppCompatActivity {
     @BindView(R.id.image)
     ImageView mImage;
 
+    @BindView(R.id.object)
+    TextView mObject;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,35 @@ public class TestStorageActivity extends AppCompatActivity {
         fileName = "myImage";
         saveImageToFile(fileName);
         setImageFromFile(fileName);
+
+        fileName = "myObject";
+        saveObjectToFile(fileName);
+        readObjectFromFile(fileName);
+    }
+
+    private void readObjectFromFile(String fileName) {
+        Product product;
+        try {
+            FileInputStream fileInputStream = openFileInput(fileName);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            product = (Product) objectInputStream.readObject();
+            mObject.setText(product.toString());
+            objectInputStream.close();
+            fileInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveObjectToFile(String fileName) {
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(openFileOutput(fileName, Context.MODE_PRIVATE));
+            Product product = new Product(1, "dom1", 9999, "d1");
+            objectOutputStream.writeObject(product);
+            objectOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setImageFromFile(String fileName) {
