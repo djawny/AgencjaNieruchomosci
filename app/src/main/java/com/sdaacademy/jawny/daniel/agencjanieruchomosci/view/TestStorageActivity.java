@@ -49,10 +49,10 @@ public class TestStorageActivity extends AppCompatActivity {
 
         fileName = "myImage";
         saveImageToFile(fileName);
-        setImage(fileName);
+        setImageFromFile(fileName);
     }
 
-    private void setImage(String fileName) {
+    private void setImageFromFile(String fileName) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
