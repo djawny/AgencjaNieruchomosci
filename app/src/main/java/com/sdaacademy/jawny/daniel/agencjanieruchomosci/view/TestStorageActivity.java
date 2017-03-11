@@ -1,6 +1,7 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
@@ -28,6 +30,7 @@ import butterknife.OnClick;
 
 public class TestStorageActivity extends AppCompatActivity {
 
+    public static final String STRING = "string";
     @BindView(R.id.files_dir)
     TextView mFilesDir;
 
@@ -42,9 +45,6 @@ public class TestStorageActivity extends AppCompatActivity {
 
     @BindView(R.id.object)
     TextView mObject;
-
-    @BindView(R.id.share_preferences_text)
-    TextView mSharePreferencesText;
 
     @BindView(R.id.string)
     EditText mString;
@@ -74,15 +74,29 @@ public class TestStorageActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.save_share_preferences, R.id.read_share_preferences})
-    public void getButtonClicked(View view){
-        switch (view.getId()){
+    public void getButtonClicked(View view) {
+        switch (view.getId()) {
             case R.id.save_share_preferences:
-
+                saveSharePreferences();
                 break;
             case R.id.read_share_preferences:
-
+                readSharePreferences();
                 break;
         }
+    }
+
+    private void readSharePreferences() {
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        String string = sharedPreferences.getString(STRING, null);
+        Toast.makeText(this, string, Toast.LENGTH_SHORT);
+    }
+
+    private void saveSharePreferences() {
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String string = mString.getText().toString();
+        editor.putString(STRING, string);
+        editor.apply();
     }
 
     private void readObjectFromFile(String fileName) {
