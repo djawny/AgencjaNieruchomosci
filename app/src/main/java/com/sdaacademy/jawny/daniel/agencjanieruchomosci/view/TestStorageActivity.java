@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import java.io.ObjectOutputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TestStorageActivity extends AppCompatActivity {
 
@@ -47,7 +49,6 @@ public class TestStorageActivity extends AppCompatActivity {
     @BindView(R.id.string)
     EditText mString;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +71,18 @@ public class TestStorageActivity extends AppCompatActivity {
         readObjectFromFile(fileName);
 
 
+    }
+
+    @OnClick({R.id.save_share_preferences, R.id.read_share_preferences})
+    public void getButtonClicked(View view){
+        switch (view.getId()){
+            case R.id.save_share_preferences:
+
+                break;
+            case R.id.read_share_preferences:
+
+                break;
+        }
     }
 
     private void readObjectFromFile(String fileName) {
