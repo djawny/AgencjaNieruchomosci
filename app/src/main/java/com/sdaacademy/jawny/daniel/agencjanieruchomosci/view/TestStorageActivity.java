@@ -69,8 +69,6 @@ public class TestStorageActivity extends AppCompatActivity {
         fileName = "myObject";
         saveObjectToFile(fileName);
         readObjectFromFile(fileName);
-
-
     }
 
     @OnClick({R.id.save_share_preferences, R.id.read_share_preferences})
