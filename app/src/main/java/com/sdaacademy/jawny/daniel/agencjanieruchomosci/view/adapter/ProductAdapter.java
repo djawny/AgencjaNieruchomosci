@@ -12,8 +12,6 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView;
 
-import java.util.List;
-
 public class ProductAdapter extends ArrayAdapter<Product> {
 
     public ProductAdapter(@NonNull Context context, @LayoutRes int resource) {
