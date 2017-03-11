@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +41,13 @@ public class TestStorageActivity extends AppCompatActivity {
     @BindView(R.id.object)
     TextView mObject;
 
+    @BindView(R.id.share_preferences_text)
+    TextView mSharePreferencesText;
+
+    @BindView(R.id.string)
+    EditText mString;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +68,8 @@ public class TestStorageActivity extends AppCompatActivity {
         fileName = "myObject";
         saveObjectToFile(fileName);
         readObjectFromFile(fileName);
+
+
     }
 
     private void readObjectFromFile(String fileName) {

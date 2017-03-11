@@ -40,4 +40,35 @@
         android:layout_marginTop="10dp"
         android:padding="8dp" />
 
+    <EditText
+        android:id="@+id/string"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Wprowadz tekst"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/save_share_preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:text="zapisz" />
+
+    <TextView
+        android:id="@+id/share_preferences_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/read_share_preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:text="odczyt" />
+
+
 </LinearLayout>
