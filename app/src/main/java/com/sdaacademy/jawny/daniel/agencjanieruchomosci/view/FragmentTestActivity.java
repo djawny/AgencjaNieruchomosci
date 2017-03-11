@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FragmentTestActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class FragmentTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_test);
+        ButterKnife.bind(this);
 
 //        getSupportFragmentManager()
 //                .beginTransaction()
