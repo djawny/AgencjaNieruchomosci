@@ -1,5 +1,6 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +19,16 @@ import butterknife.ButterKnife;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private List<Product> mProducts;
+    private final LayoutInflater mLayoutInflater;
 
-    public ProductAdapter() {
+    public ProductAdapter(Context context) {
+        mLayoutInflater = LayoutInflater.from(context);
         mProducts = new ArrayList<>();
     }
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout, parent, false);
+        View itemView = mLayoutInflater.inflate(R.layout.row_layout, parent, false);
         return new ProductViewHolder(itemView);
     }
 
@@ -35,7 +38,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) holder.mProductCardView.getContext());
     }
 
-    public void updateData(final List<Product> data) {
+    public void swapData(final List<Product> data) {
         if (data != null) {
             mProducts.clear();
             mProducts.addAll(data);
