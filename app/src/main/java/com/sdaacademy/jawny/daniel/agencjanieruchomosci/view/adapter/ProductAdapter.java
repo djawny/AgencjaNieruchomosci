@@ -58,16 +58,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
+        private Context context;
+
         @BindView(R.id.product_card_view)
         ProductCardView mProductCardView;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
+            context = itemView.getContext();
             ButterKnife.bind(this, itemView);
         }
 
         public void bind(Product product) {
-            ((ProductCardView) itemView).bindTo(product, null);//TODO wymien null
+            mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) context);
         }
     }
 }
