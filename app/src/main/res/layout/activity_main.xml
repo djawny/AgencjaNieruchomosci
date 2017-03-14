@@ -30,9 +30,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/product_recycle_view"
+            android:id="@+id/products_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginTop="8dp"
+            android:choiceMode="singleChoice"
+            android:orientation="vertical"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager">
 
         </android.support.v7.widget.RecyclerView>
 

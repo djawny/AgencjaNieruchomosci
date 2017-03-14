@@ -3,7 +3,6 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
-    @BindView(R.id.product_recycle_view)
+    @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
 
     @BindView(R.id.toolbar)
@@ -50,10 +49,10 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     }
 
     private void setRecycleView() {
-        mRecycleView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecycleView.setLayoutManager(linearLayoutManager);
+//        mRecycleView.setHasFixedSize(true);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        mRecycleView.setLayoutManager(linearLayoutManager);
         mProducts = mProductRepository.getProducts();
         mAdapter = new ProductAdapter(mProducts);
         mRecycleView.setAdapter(mAdapter);

@@ -28,7 +28,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     @Override
     public void onBindViewHolder(ProductHolder holder, int position) {
         Product product = getItem(position);
-        holder.mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) this);
+        holder.mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) holder.mProductCardView.getContext());
     }
 
     public void swapData(final List<Product> data) {
