@@ -3,6 +3,7 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     private void setRecycleView() {
         mRecycleView.setHasFixedSize(true);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+//        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+//        mRecycleView.setLayoutManager(gridLayoutManager);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
