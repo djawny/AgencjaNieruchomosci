@@ -65,5 +65,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        public void bind(Product product) {
+            ((ProductCardView) itemView).bindTo(product, null);
+        }
     }
 }
