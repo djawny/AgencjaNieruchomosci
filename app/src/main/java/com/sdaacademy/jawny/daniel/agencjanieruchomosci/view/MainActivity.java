@@ -3,11 +3,12 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
-    @BindView(R.id.product_list)
-    ListView mProductList;
+    @BindView(R.id.product_recycle_view)
+    RecyclerView mRecycleView;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
 
-    private ProductAdapter productAdapter;
+    private ProductAdapter mAdapter;
     private List<Product> products;
 
     @Override
@@ -46,7 +47,16 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupToolBar();
-        setProductListAdapter();
+        setRecycleView();
+    }
+
+    private void setRecycleView() {
+        mRecycleView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycleView.setLayoutManager(linearLayoutManager);
+        mAdapter = new ProductAdapter(products);
+        mRecycleView.setAdapter(mAdapter);
     }
 
     @Override
@@ -65,19 +75,10 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setProductListAdapter() {
-        products = mProductRepository.getProducts();
-        productAdapter = new ProductAdapter(this, R.layout.row_layout);
-        productAdapter.addAll(products);
-        mProductList.setAdapter(productAdapter);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        products = mProductRepository.getProducts();
-        productAdapter.clear();
-        productAdapter.addAll(products);
+        mAdapter.swapData(products);
     }
 
     @Override
@@ -91,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
 
+        Intent intent = new Intent(this, AddProductActivity.class);
+        startActivity(intent);
+
 //        Log.d(getClass().getSimpleName(), "New product click");
 //
 //        Toast.makeText(this, "New product click", Toast.LENGTH_SHORT).show();
@@ -99,13 +103,9 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 //                .setAction("Odśwież", new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
-//
 //                    }
 //                })
 //                .setActionTextColor(Color.GREEN)
 //                .show();
-
-        Intent intent = new Intent(this, AddProductActivity.class);
-        startActivity(intent);
     }
 }

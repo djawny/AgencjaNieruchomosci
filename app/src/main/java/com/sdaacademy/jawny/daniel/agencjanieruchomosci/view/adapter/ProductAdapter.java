@@ -1,34 +1,60 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter;
 
-import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView;
 
-public class ProductAdapter extends ArrayAdapter<Product> {
+import java.util.List;
 
-    public ProductAdapter(@NonNull Context context, @LayoutRes int resource) {
-        super(context, resource);
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
+
+    private List<Product> mProducts;
+
+    public ProductAdapter(List<Product> products) {
+        mProducts = products;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, View rowView, @NonNull ViewGroup parent) {
+    public ProductHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout, parent, false);
+        return new ProductHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(ProductHolder holder, int position) {
         Product product = getItem(position);
+        holder.mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) this);
+    }
 
-        if (rowView == null) {
-            rowView = LayoutInflater.from(getContext()).inflate(R.layout.row_layout, parent, false);
+    public void swapData(final List<Product> data) {
+        if (data != null) {
+            mProducts.clear();
+            mProducts.addAll(data);
+            notifyDataSetChanged();
         }
-        ProductCardView mProductCardView = (ProductCardView) rowView.findViewById(R.id.product);
-        mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) getContext());
+    }
 
-        return rowView;
+    @Override
+    public int getItemCount() {
+        return mProducts.size();
+    }
+
+    public Product getItem(int position) {
+        return mProducts.get(position);
+    }
+
+    public class ProductHolder extends RecyclerView.ViewHolder {
+
+        ProductCardView mProductCardView;
+
+        public ProductHolder(View itemView) {
+            super(itemView);
+            mProductCardView = (ProductCardView) itemView.findViewById(R.id.product);
+        }
     }
 }
