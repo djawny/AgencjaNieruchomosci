@@ -51,14 +51,11 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     private void setRecycleView() {
         mRecycleView.setHasFixedSize(true);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
-//        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-//        mRecycleView.setLayoutManager(gridLayoutManager);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
         mProducts = mProductRepository.getProducts();
-        mProductAdapter = new ProductAdapter(this,mProducts);
+        mProductAdapter = new ProductAdapter(this, mProducts);
         mRecycleView.setAdapter(mProductAdapter);
     }
 
@@ -95,21 +92,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
-
         Intent intent = new Intent(this, AddProductActivity.class);
         startActivity(intent);
-
-//        Log.d(getClass().getSimpleName(), "New product click");
-//
-//        Toast.makeText(this, "New product click", Toast.LENGTH_SHORT).show();
-//
-//        Snackbar.make(mRootLayout,"Brak internetu",Snackbar.LENGTH_INDEFINITE)
-//                .setAction("Odśwież", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                    }
-//                })
-//                .setActionTextColor(Color.GREEN)
-//                .show();
     }
 }
