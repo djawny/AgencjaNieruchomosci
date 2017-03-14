@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     View mRootLayout;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
-    private ProductAdapter mAdapter;
+    private ProductAdapter mProductAdapter;
     private List<Product> mProducts;
 
     @Override
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 //        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        mRecycleView.setLayoutManager(linearLayoutManager);
         mProducts = mProductRepository.getProducts();
-        mAdapter = new ProductAdapter(mProducts);
-        mRecycleView.setAdapter(mAdapter);
+        mProductAdapter = new ProductAdapter(mProducts);
+        mRecycleView.setAdapter(mProductAdapter);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     @Override
     protected void onResume() {
         super.onResume();
-        mAdapter.swapData(mProducts);
+        mProductAdapter.swapData(mProducts);
     }
 
     @Override

@@ -11,6 +11,9 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardV
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
 
     private List<Product> mProducts;
@@ -48,13 +51,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         return mProducts.get(position);
     }
 
-    public class ProductHolder extends RecyclerView.ViewHolder {
+    public static class ProductHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.product_card_view)
         ProductCardView mProductCardView;
 
         public ProductHolder(View itemView) {
             super(itemView);
-            mProductCardView = (ProductCardView) itemView.findViewById(R.id.product_card_view);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
