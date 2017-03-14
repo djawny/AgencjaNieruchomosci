@@ -54,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
         public ProductHolder(View itemView) {
             super(itemView);
-            mProductCardView = (ProductCardView) itemView.findViewById(R.id.product);
+            mProductCardView = (ProductCardView) itemView.findViewById(R.id.product_card_view);
         }
     }
 }
