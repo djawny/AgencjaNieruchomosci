@@ -20,8 +20,6 @@
         </activity>
         <activity android:name=".view.ProductDetailsActivity" />
         <activity android:name=".view.AddProductActivity" />
-        <activity android:name=".view.TestStorageActivity" />
-        <activity android:name=".view.FragmentTestActivity"></activity>
     </application>
 
 </manifest>

@@ -47,10 +47,6 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         ButterKnife.bind(this);
         setupToolBar();
         setProductListAdapter();
-//        Intent intent1 = new Intent(this, TestStorageActivity.class);
-//        startActivity(intent1);
-        Intent intent2 = new Intent(this, FragmentTestActivity.class);
-        startActivity(intent2);
     }
 
     @Override
