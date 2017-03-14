@@ -21,9 +21,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> mProducts;
     private LayoutInflater mLayoutInflater;
 
-    public ProductAdapter(Context context) {
+    public ProductAdapter(Context context, List<Product> products) {
         mLayoutInflater = LayoutInflater.from(context);
         mProducts = new ArrayList<>();
+        mProducts.addAll(products);
     }
 
     @Override
@@ -38,10 +39,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) holder.mProductCardView.getContext());
     }
 
-    public void swapData(final List<Product> data) {
-        if (data != null) {
+    public void swapData(List<Product> products) {
+        if (products != null) {
             mProducts.clear();
-            mProducts.addAll(data);
+            mProducts.addAll(products);
             notifyDataSetChanged();
         }
     }
