@@ -67,7 +67,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
 
         public void bind(Product product) {
-            ((ProductCardView) itemView).bindTo(product, null);
+            ((ProductCardView) itemView).bindTo(product, null);//TODO wymien null
         }
     }
 }
