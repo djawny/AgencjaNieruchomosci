@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private List<Product> mProducts;
 
@@ -23,13 +23,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     }
 
     @Override
-    public ProductHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout, parent, false);
-        return new ProductHolder(itemView);
+        return new ProductViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ProductHolder holder, int position) {
+    public void onBindViewHolder(ProductViewHolder holder, int position) {
         Product product = getItem(position);
         holder.mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) holder.mProductCardView.getContext());
     }
@@ -51,12 +51,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         return mProducts.get(position);
     }
 
-    public static class ProductHolder extends RecyclerView.ViewHolder {
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.product_card_view)
         ProductCardView mProductCardView;
 
-        public ProductHolder(View itemView) {
+        public ProductViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
