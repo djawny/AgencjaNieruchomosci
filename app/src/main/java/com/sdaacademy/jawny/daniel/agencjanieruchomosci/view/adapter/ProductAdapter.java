@@ -9,6 +9,7 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -18,8 +19,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     private List<Product> mProducts;
 
-    public ProductAdapter(List<Product> products) {
-        mProducts = products;
+    public ProductAdapter() {
+        mProducts = new ArrayList<>();
     }
 
     @Override

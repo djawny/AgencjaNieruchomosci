@@ -3,6 +3,7 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -49,13 +50,14 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     }
 
     private void setRecycleView() {
-//        mRecycleView.setHasFixedSize(true);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        mRecycleView.setLayoutManager(linearLayoutManager);
+        mRecycleView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycleView.setLayoutManager(linearLayoutManager);
         mProducts = mProductRepository.getProducts();
-        mProductAdapter = new ProductAdapter(mProducts);
+        mProductAdapter = new ProductAdapter();
         mRecycleView.setAdapter(mProductAdapter);
+        mProductAdapter.swapData(mProducts);
     }
 
     @Override
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     @Override
     protected void onResume() {
         super.onResume();
+        mProducts = mProductRepository.getProducts();
         mProductAdapter.swapData(mProducts);
     }
 
