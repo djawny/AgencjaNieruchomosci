@@ -35,7 +35,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.mProductCardView.bindTo(product, (ProductCardView.ProductCardViewInterface) holder.mProductCardView.getContext());
     }
 
-    public void swapData(final List<Product> data) {
+    public void updateData(final List<Product> data) {
         if (data != null) {
             mProducts.clear();
             mProducts.addAll(data);

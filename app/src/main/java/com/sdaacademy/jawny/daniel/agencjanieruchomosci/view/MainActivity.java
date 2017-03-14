@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         mProducts = mProductRepository.getProducts();
         mProductAdapter = new ProductAdapter();
         mRecycleView.setAdapter(mProductAdapter);
-        mProductAdapter.swapData(mProducts);
+        mProductAdapter.updateData(mProducts);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     protected void onResume() {
         super.onResume();
         mProducts = mProductRepository.getProducts();
-        mProductAdapter.swapData(mProducts);
+        mProductAdapter.updateData(mProducts);
     }
 
     @Override
