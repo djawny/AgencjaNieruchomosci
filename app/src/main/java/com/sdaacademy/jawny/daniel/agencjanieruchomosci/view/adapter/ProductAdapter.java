@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private final List<Product> mProducts;
-    private final LayoutInflater mLayoutInflater;
+    private List<Product> mProducts;
+    private LayoutInflater mLayoutInflater;
 
     public ProductAdapter(Context context) {
         mLayoutInflater = LayoutInflater.from(context);
