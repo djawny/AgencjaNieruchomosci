@@ -3,32 +3,17 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter.ProductAdapter;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface {
-
-    public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
-
-    @BindView(R.id.products_recycle_view)
-    RecyclerView mRecycleView;
+public class MainActivity extends AppCompatActivity{
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -36,27 +21,12 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
     @BindView(R.id.activity_main)
     View mRootLayout;
 
-    private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
-    private ProductAdapter mProductAdapter;
-    private List<Product> mProducts;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupToolBar();
-        setRecycleView();
-    }
-
-    private void setRecycleView() {
-        mRecycleView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecycleView.setLayoutManager(linearLayoutManager);
-        mProducts = mProductRepository.getProducts();
-        mProductAdapter = new ProductAdapter(this, mProducts);
-        mRecycleView.setAdapter(mProductAdapter);
     }
 
     @Override
@@ -73,21 +43,6 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         setSupportActionBar(mToolbar);
         mToolbar.setTitle("Nieruchomości");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mProducts = mProductRepository.getProducts();
-        mProductAdapter.swapData(mProducts);
-    }
-
-    @Override
-    public void onProductClicked(Product product) {
-        Intent intent = new Intent(this, ProductDetailsActivity.class);
-        intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
-        startActivity(intent);
-        Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
     }
 
     @OnClick(R.id.add_new_product)
