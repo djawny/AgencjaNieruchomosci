@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity{
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.activity_main)
-    View mRootLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
