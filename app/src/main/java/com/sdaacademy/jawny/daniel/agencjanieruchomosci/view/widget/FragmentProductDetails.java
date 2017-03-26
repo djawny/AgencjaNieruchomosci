@@ -17,14 +17,13 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.ProductDetailsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentProductDetails extends Fragment {
+import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList.INTENT_PRODUCT_ID;
 
-    public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
+public class FragmentProductDetails extends Fragment {
 
     @BindView(R.id.product_image)
     ImageView mProductImage;
