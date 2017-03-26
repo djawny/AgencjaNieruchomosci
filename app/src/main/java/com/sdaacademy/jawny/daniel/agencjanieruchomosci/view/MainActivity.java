@@ -47,4 +47,9 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, AddProductActivity.class);
         startActivity(intent);
     }
+
+//    Observable.just("one", "two", "three", "four", "five")
+//            .subscribeOn(Schedulers.newThread())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(/* an Observer */);
 }

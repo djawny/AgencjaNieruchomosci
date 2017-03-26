@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +23,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductSelectedListener {
 
@@ -33,6 +37,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
     private List<Product> mProducts;
+//    private Subscription subscription;
 
     @Nullable
     @Override
@@ -53,9 +58,30 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
-        mProducts = mProductRepository.getProducts();
-        mProductAdapter = new ProductAdapter(getActivity(), mProducts, this);
-        mRecycleView.setAdapter(mProductAdapter);
+//        mProducts = mProductRepository.rxGetProducts();
+        mProductRepository
+                .rxGetProducts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<List<Product>>() {
+                    @Override
+                    public void onNext(List<Product> value) {
+                        FragmentActivity activity = getActivity();
+                        mProductAdapter = new ProductAdapter(activity, value, FragmentProductsList.this);
+                        mRecycleView.setAdapter(mProductAdapter);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     @Override
@@ -69,7 +95,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onResume() {
         super.onResume();
-        mProducts = mProductRepository.getProducts();
-        mProductAdapter.swapData(mProducts);
+//        mProducts = mProductRepository.rxGetProducts();
+//        mProductAdapter.swapData(mProducts);
     }
 }
