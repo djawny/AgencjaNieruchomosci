@@ -15,10 +15,6 @@ import butterknife.ButterKnife;
 
 public class ProductCardView extends CardView {
 
-    public interface ProductCardViewInterface {
-        void onProductClicked(Product product);
-    }
-
     @BindView(R.id.product_image)
     ImageView mProductImage;
 
@@ -48,17 +44,10 @@ public class ProductCardView extends CardView {
         ButterKnife.bind(this);
     }
 
-    public void bindTo(final Product product, final ProductCardViewInterface productCardViewInterface) {
+    public void bindTo(Product product) {
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
         int drawableResourceId = this.getResources().getIdentifier(product.getmImageName(), "drawable", getContext().getPackageName());
         mProductImage.setImageResource(drawableResourceId);
-
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                productCardViewInterface.onProductClicked(product);
-            }
-        });
     }
 }

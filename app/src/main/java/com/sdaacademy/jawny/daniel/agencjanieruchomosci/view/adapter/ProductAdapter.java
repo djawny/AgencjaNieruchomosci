@@ -18,6 +18,10 @@ import butterknife.ButterKnife;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
+    public interface ProductClickedListener {
+        public void onProductClicked(Product product);
+    }
+
     private List<Product> mProducts;
     private LayoutInflater mLayoutInflater;
 
@@ -67,7 +71,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
 
         public void bind(Product product) {
-            mProductCardView.bindTo(product, null);
+            mProductCardView.bindTo(product);
         }
     }
 }
