@@ -23,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentProductsList extends Fragment implements ProductAdapter.ProductClickedListener {
+public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductSelectedListener {
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
@@ -59,7 +59,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.Pro
     }
 
     @Override
-    public void onProductClicked(Product product) {
+    public void onProductSelected(Product product) {
         Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
         intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
         startActivity(intent);
