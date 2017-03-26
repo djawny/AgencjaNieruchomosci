@@ -43,8 +43,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         setRecycleView();
     }
 

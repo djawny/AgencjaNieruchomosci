@@ -52,8 +52,8 @@ public class FragmentProductDetails extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         Bundle bundle = getActivity().getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
         Product product = mProductRepository.getProduct(productId);
