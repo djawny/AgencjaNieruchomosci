@@ -23,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentProductsList extends Fragment {
+public class FragmentProductsList extends Fragment implements ProductAdapter.ProductClickedListener{
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
@@ -58,13 +58,13 @@ public class FragmentProductsList extends Fragment {
         mRecycleView.setAdapter(mProductAdapter);
     }
 
-//    @Override
-//    public void onProductClicked(Product product) {
-//        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-//        intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
-//        startActivity(intent);
-//        Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
-//    }
+    @Override
+    public void onProductClicked(Product product) {
+        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
+        startActivity(intent);
+        Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+    }
 
     @Override
     public void onResume() {
