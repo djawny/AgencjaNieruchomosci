@@ -23,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentProductsList extends Fragment implements ProductAdapter.ProductClickedListener{
+public class FragmentProductsList extends Fragment implements ProductAdapter.ProductClickedListener {
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
 
@@ -54,7 +54,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.Pro
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
         mProducts = mProductRepository.getProducts();
-        mProductAdapter = new ProductAdapter(getActivity(), mProducts);
+        mProductAdapter = new ProductAdapter(getActivity(), mProducts, this);
         mRecycleView.setAdapter(mProductAdapter);
     }
 
