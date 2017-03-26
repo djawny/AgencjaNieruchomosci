@@ -19,16 +19,19 @@ import butterknife.ButterKnife;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     public interface ProductClickedListener {
-        public void onProductClicked(Product product);
+        void onProductClicked(Product product);
     }
+
+    private ProductClickedListener mListener;
 
     private List<Product> mProducts;
     private LayoutInflater mLayoutInflater;
 
-    public ProductAdapter(Context context, List<Product> products) {
+    public ProductAdapter(Context context, List<Product> products, ProductClickedListener productClickedListener) {
         mLayoutInflater = LayoutInflater.from(context);
         mProducts = new ArrayList<>();
         mProducts.addAll(products);
+        mListener = productClickedListener;
     }
 
     @Override
@@ -39,8 +42,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        Product product = getItem(position);
+        final Product product = getItem(position);
         holder.bind(product);
+        holder.mProductCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onProductClicked(product);
+            }
+        });
     }
 
     public void swapData(List<Product> products) {
