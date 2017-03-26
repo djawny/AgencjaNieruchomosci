@@ -25,11 +25,11 @@ public class ProductCardView extends CardView {
     TextView mProductPrice;
 
     public ProductCardView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ProductCardView(Context context, AttributeSet attrs) {
-        this(context,null,0);
+        this(context, attrs, 0);
     }
 
     public ProductCardView(Context context, AttributeSet attrs, int defStyleAttr) {
