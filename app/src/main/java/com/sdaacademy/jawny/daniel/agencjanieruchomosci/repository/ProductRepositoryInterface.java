@@ -8,10 +8,9 @@ import io.reactivex.Observable;
 
 public interface ProductRepositoryInterface {
 
-    //    List<Product> getProducts();
     Observable<List<Product>> rxGetProducts();
 
-    Product getProduct(int id);
+    Observable<Product> rxGetProduct(int id);
 
     void addProduct(String name, int price);
 }

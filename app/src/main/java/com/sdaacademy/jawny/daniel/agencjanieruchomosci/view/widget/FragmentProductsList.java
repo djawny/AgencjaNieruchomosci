@@ -58,7 +58,6 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
-//        mProducts = mProductRepository.rxGetProducts();
         mProductRepository
                 .rxGetProducts()
                 .subscribeOn(Schedulers.io())
@@ -81,7 +80,6 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
                     }
                 });
-
     }
 
     @Override

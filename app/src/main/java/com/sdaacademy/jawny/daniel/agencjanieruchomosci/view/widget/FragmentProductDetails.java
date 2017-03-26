@@ -20,6 +20,9 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductReposi
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList.INTENT_PRODUCT_ID;
 
@@ -55,9 +58,27 @@ public class FragmentProductDetails extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getActivity().getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
-        Product product = mProductRepository.getProduct(productId);
-        setDisplay(product);
-        setToolBar(product);
+        mProductRepository
+                .rxGetProduct(productId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<Product>() {
+                    @Override
+                    public void onNext(Product product) {
+                        setDisplay(product);
+                        setToolBar(product);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void setDisplay(Product product) {
