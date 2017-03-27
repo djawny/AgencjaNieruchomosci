@@ -37,7 +37,6 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
     private DisposableObserver<List<Product>> disposableObserver;
-//    private List<Product> mProducts;
 
     @Nullable
     @Override
@@ -93,6 +92,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onDestroy() {
         super.onDestroy();
-        disposableObserver.dispose();
+        if (disposableObserver != null && !disposableObserver.isDisposed()) {
+            disposableObserver.dispose();
+        }
     }
 }

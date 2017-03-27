@@ -85,7 +85,9 @@ public class FragmentProductDetails extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        disposableObserver.dispose();
+        if (disposableObserver != null && !disposableObserver.isDisposed()) {
+            disposableObserver.dispose();
+        }
     }
 
     private void setDisplay(Product product) {
