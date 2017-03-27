@@ -33,6 +33,7 @@ import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity
 public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductSelectedListener {
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
+    private static final String TAG = FragmentProductDetails.class.getSimpleName();
 
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
@@ -82,7 +83,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.d(getActivity().getClass().getSimpleName(), "onError", e);
+                                Log.d(TAG, "onError", e);
                             }
 
                             @Override
@@ -120,7 +121,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(getActivity().getClass().getSimpleName(), "onError", e);
+                        Log.d(TAG, "onError", e);
                     }
 
                     @Override

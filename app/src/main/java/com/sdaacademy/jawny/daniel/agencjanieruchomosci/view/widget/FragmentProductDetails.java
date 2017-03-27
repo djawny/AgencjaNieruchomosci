@@ -29,6 +29,8 @@ import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.Fragm
 
 public class FragmentProductDetails extends Fragment {
 
+    private static final String TAG = FragmentProductDetails.class.getSimpleName();
+
     @BindView(R.id.product_image)
     ImageView mProductImage;
 
@@ -73,7 +75,7 @@ public class FragmentProductDetails extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(getActivity().getClass().getSimpleName(), "onError", e);
+                        Log.d(TAG, "onError", e);
                     }
 
                     @Override
