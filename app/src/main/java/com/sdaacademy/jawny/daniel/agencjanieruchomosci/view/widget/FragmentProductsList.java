@@ -55,45 +55,42 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         setRecycleView();
     }
 
-    private void setRecycleView() {
-        mRecycleView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecycleView.setLayoutManager(linearLayoutManager);
-        displayData();
-    }
-
-    private void displayData() {
-        disposableObserver = mProductRepository
-                .rxGetProducts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<List<Product>>() {
-                    @Override
-                    public void onNext(List<Product> value) {
-                        FragmentActivity activity = getActivity();
-                        mProductAdapter = new ProductAdapter(activity, value, FragmentProductsList.this);
-                        mRecycleView.setAdapter(mProductAdapter);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
     @Override
     public void onProductSelected(Product product) {
         Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
         intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
         startActivity(intent);
         Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PRODUCT_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                disposableObserver = mProductRepository
+                        .rxGetProducts()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableObserver<List<Product>>() {
+                            @Override
+                            public void onNext(List<Product> products) {
+                                if (mProductAdapter != null) {
+                                    mProductAdapter.swapData(products);
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.d(getActivity().getClass().getSimpleName(), "onError", e);
+                            }
+
+                            @Override
+                            public void onComplete() {
+                            }
+                        });
+            }
+        }
     }
 
     @Override
@@ -104,13 +101,31 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_PRODUCT_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                displayData();
-            }
-        }
+    private void setRecycleView() {
+        mRecycleView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycleView.setLayoutManager(linearLayoutManager);
+        disposableObserver = mProductRepository
+                .rxGetProducts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<List<Product>>() {
+                    @Override
+                    public void onNext(List<Product> products) {
+                        FragmentActivity activity = getActivity();
+                        mProductAdapter = new ProductAdapter(activity, products, FragmentProductsList.this);
+                        mRecycleView.setAdapter(mProductAdapter);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(getActivity().getClass().getSimpleName(), "onError", e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
     }
 }

@@ -7,6 +7,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,12 +73,11 @@ public class FragmentProductDetails extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d(getActivity().getClass().getSimpleName(), "onError", e);
                     }
 
                     @Override
                     public void onComplete() {
-
                     }
                 });
     }
