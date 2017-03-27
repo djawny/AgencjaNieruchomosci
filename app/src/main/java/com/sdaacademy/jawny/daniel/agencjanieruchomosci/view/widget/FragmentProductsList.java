@@ -36,8 +36,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
-    private List<Product> mProducts;
-//    private Subscription subscription;
+    private DisposableObserver<List<Product>> disposableObserver;
+//    private List<Product> mProducts;
 
     @Nullable
     @Override
@@ -58,11 +58,11 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
-        mProductRepository
+        disposableObserver = mProductRepository
                 .rxGetProducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<List<Product>>() {
+                .subscribeWith(new DisposableObserver<List<Product>>() {
                     @Override
                     public void onNext(List<Product> value) {
                         FragmentActivity activity = getActivity();
@@ -91,9 +91,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-//        mProducts = mProductRepository.rxGetProducts();
-//        mProductAdapter.swapData(mProducts);
+    public void onDestroy() {
+        super.onDestroy();
+        disposableObserver.dispose();
     }
 }

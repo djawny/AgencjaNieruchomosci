@@ -44,6 +44,7 @@ public class FragmentProductDetails extends Fragment {
     TextView mProductPrice;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
+    private DisposableObserver<Product> disposableObserver;
 
     @Nullable
     @Override
@@ -58,11 +59,11 @@ public class FragmentProductDetails extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getActivity().getIntent().getExtras();
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
-        mProductRepository
+        disposableObserver = mProductRepository
                 .rxGetProduct(productId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<Product>() {
+                .subscribeWith(new DisposableObserver<Product>() {
                     @Override
                     public void onNext(Product product) {
                         setDisplay(product);
@@ -79,6 +80,12 @@ public class FragmentProductDetails extends Fragment {
 
                     }
                 });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        disposableObserver.dispose();
     }
 
     private void setDisplay(Product product) {
