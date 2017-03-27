@@ -2,6 +2,7 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -20,12 +21,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
+    Fragment mFragmentProductList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupToolBar();
+        mFragmentProductList = getSupportFragmentManager().findFragmentById(R.id.fragment_products_list);
     }
 
     @Override
@@ -47,6 +51,6 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
         Intent intent = new Intent(this, AddProductActivity.class);
-        startActivityForResult(intent, ADD_PRODUCT_REQUEST_CODE);
+        mFragmentProductList.startActivityForResult(intent, ADD_PRODUCT_REQUEST_CODE);
     }
 }
