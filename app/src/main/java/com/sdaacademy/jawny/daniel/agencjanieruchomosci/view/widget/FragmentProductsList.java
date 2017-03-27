@@ -27,6 +27,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+import static android.app.Activity.RESULT_OK;
+import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.ADD_PRODUCT_REQUEST_CODE;
+
 public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductSelectedListener {
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
@@ -57,6 +60,10 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
+        displayData();
+    }
+
+    private void displayData() {
         disposableObserver = mProductRepository
                 .rxGetProducts()
                 .subscribeOn(Schedulers.io())
@@ -94,6 +101,16 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         super.onDestroy();
         if (disposableObserver != null && !disposableObserver.isDisposed()) {
             disposableObserver.dispose();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PRODUCT_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                displayData();
+            }
         }
     }
 }

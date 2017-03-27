@@ -13,7 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
+
+    public static final int ADD_PRODUCT_REQUEST_CODE = 1;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -45,6 +47,6 @@ public class MainActivity extends AppCompatActivity{
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
         Intent intent = new Intent(this, AddProductActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, ADD_PRODUCT_REQUEST_CODE);
     }
 }

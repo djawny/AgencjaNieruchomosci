@@ -1,12 +1,12 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
 
@@ -37,6 +37,8 @@ public class AddProductActivity extends AppCompatActivity {
         String price = mProductPrice.getText().toString().trim();
         if (!name.isEmpty() && !price.isEmpty()) {
             mProductRepository.addProduct(name, Integer.parseInt(price));
+            Intent returnIntent = getIntent();
+            setResult(RESULT_OK, returnIntent);
             finish();
         }
     }
@@ -44,5 +46,10 @@ public class AddProductActivity extends AppCompatActivity {
     @OnClick(R.id.chancel_button)
     public void onChancelClicked(View view) {
         onBackPressed();
+    }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
     }
 }
