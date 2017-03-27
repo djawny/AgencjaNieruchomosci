@@ -33,7 +33,7 @@ import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity
 public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductSelectedListener {
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
-    private static final String TAG = FragmentProductDetails.class.getSimpleName();
+    private static final String TAG = FragmentProductsList.class.getSimpleName();
 
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
