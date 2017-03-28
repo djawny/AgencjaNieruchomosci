@@ -1,11 +1,10 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,11 +36,11 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
 
-    public interface OnProductSelected {
+    public interface OnProductSelectedListener {
         void onProductSelected(Product product);
     }
 
-    private OnProductSelected mListener;
+    private OnProductSelectedListener mListener;
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
     private DisposableObserver<List<Product>> disposableObserver;
@@ -84,7 +83,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.d(TAG, "onError", e);
+                                Log.d(TAG, e.getMessage(), e);
                             }
 
                             @Override
@@ -96,11 +95,19 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (activity instanceof OnProductSelected) {
-            mListener = (OnProductSelected) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnProductSelectedListener) {
+            mListener = (OnProductSelectedListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnProductSelectedListener");
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @Override
@@ -129,7 +136,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError", e);
+                        Log.d(TAG, e.getMessage(), e);
                     }
 
                     @Override

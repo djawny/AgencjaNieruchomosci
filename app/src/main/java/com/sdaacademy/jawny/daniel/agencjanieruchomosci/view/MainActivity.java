@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements FragmentProductsList.OnProductSelected{
+public class MainActivity extends AppCompatActivity implements FragmentProductsList.OnProductSelectedListener {
 
     public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
     public static final int ADD_PRODUCT_REQUEST_CODE = 1;

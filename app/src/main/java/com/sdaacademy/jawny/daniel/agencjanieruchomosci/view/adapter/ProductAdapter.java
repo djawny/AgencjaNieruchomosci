@@ -23,7 +23,7 @@ public class ProductAdapter extends BaseAdapter<Product> {
     private OnProductClickedListener mListener;
 
     public ProductAdapter(Context context, List<Product> products, OnProductClickedListener onProductClickedListener) {
-        super(context,products);
+        super(context, products);
         mListener = onProductClickedListener;
     }
 
@@ -35,13 +35,15 @@ public class ProductAdapter extends BaseAdapter<Product> {
 
     @Override
     public void onBind(RecyclerView.ViewHolder holder, final Product product, int position) {
-        ((ProductViewHolder)holder).bind(product);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onProductClicked(product);
-            }
-        });
+        ((ProductViewHolder) holder).bind(product);
+        if (mListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onProductClicked(product);
+                }
+            });
+        }
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {

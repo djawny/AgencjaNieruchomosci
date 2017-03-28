@@ -8,6 +8,8 @@ import java.io.Serializable;
 @DatabaseTable(tableName = Product.TABLE_NAME)
 public class Product implements Serializable {
 
+    public static final int UNDEFINED = -1;
+
     static final String TABLE_NAME = "products";
 
     @DatabaseField(columnName = "id", generatedId = true)

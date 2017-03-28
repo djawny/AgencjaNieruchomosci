@@ -61,27 +61,29 @@ public class FragmentProductDetails extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getActivity().getIntent().getExtras();
-        int productId = bundle.getInt(INTENT_PRODUCT_ID);
-        disposableObserver = mProductRepository
-                .rxGetProduct(productId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<Product>() {
-                    @Override
-                    public void onNext(Product product) {
-                        setDisplay(product);
-                        setToolBar(product);
-                    }
+        int productId = bundle.getInt(INTENT_PRODUCT_ID,Product.UNDEFINED);
+        if (productId != Product.UNDEFINED) {
+            disposableObserver = mProductRepository
+                    .rxGetProduct(productId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableObserver<Product>() {
+                        @Override
+                        public void onNext(Product product) {
+                            setDisplay(product);
+                            setToolBar(product);
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "onError", e);
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.d(TAG, e.getMessage(), e);
+                        }
 
-                    @Override
-                    public void onComplete() {
-                    }
-                });
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+        }
     }
 
     @Override
