@@ -1,5 +1,6 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +17,6 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.ProductDetailsActivity;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter.ProductAdapter;
 
 import java.util.List;
@@ -96,6 +96,14 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnProductSelected) {
+            mListener = (OnProductSelected) activity;
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (disposableObserver != null && !disposableObserver.isDisposed()) {
@@ -115,10 +123,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
                 .subscribeWith(new DisposableObserver<List<Product>>() {
                     @Override
                     public void onNext(List<Product> products) {
-                        FragmentActivity activity = getActivity();
-                        mProductAdapter = new ProductAdapter(activity, products, FragmentProductsList.this);
+                        mProductAdapter = new ProductAdapter(getActivity(), products, FragmentProductsList.this);
                         mRecycleView.setAdapter(mProductAdapter);
-                        mListener = (OnProductSelected) getActivity();
                     }
 
                     @Override
