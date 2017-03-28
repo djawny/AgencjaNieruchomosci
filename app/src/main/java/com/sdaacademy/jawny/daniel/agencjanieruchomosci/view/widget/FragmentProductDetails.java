@@ -25,7 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList.INTENT_PRODUCT_ID;
+import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.INTENT_PRODUCT_ID;
 
 public class FragmentProductDetails extends Fragment {
 

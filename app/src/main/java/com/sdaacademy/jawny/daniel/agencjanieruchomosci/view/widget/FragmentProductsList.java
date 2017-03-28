@@ -30,14 +30,18 @@ import io.reactivex.schedulers.Schedulers;
 import static android.app.Activity.RESULT_OK;
 import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.ADD_PRODUCT_REQUEST_CODE;
 
-public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductSelectedListener {
+public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductClickedListener {
 
-    public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
     private static final String TAG = FragmentProductsList.class.getSimpleName();
 
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
 
+    public interface OnProductSelected {
+        void onProductSelected(Product product);
+    }
+
+    private OnProductSelected mListener;
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
     private DisposableObserver<List<Product>> disposableObserver;
@@ -57,11 +61,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     }
 
     @Override
-    public void onProductSelected(Product product) {
-        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-        intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
-        startActivity(intent);
-        Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+    public void onProductClicked(Product product) {
+        mListener.onProductSelected(product);
     }
 
     @Override
@@ -117,6 +118,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
                         FragmentActivity activity = getActivity();
                         mProductAdapter = new ProductAdapter(activity, products, FragmentProductsList.this);
                         mRecycleView.setAdapter(mProductAdapter);
+                        mListener = (OnProductSelected) getActivity();
                     }
 
                     @Override

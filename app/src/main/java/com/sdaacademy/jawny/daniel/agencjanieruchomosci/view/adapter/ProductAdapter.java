@@ -16,15 +16,15 @@ import butterknife.ButterKnife;
 
 public class ProductAdapter extends BaseAdapter<Product> {
 
-    public interface OnProductSelectedListener {
-        void onProductSelected(Product product);
+    public interface OnProductClickedListener {
+        void onProductClicked(Product product);
     }
 
-    private OnProductSelectedListener mListener;
+    private OnProductClickedListener mListener;
 
-    public ProductAdapter(Context context, List<Product> products, OnProductSelectedListener onProductSelectedListener) {
+    public ProductAdapter(Context context, List<Product> products, OnProductClickedListener onProductClickedListener) {
         super(context,products);
-        mListener = onProductSelectedListener;
+        mListener = onProductClickedListener;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ProductAdapter extends BaseAdapter<Product> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onProductSelected(product);
+                mListener.onProductClicked(product);
             }
         });
     }

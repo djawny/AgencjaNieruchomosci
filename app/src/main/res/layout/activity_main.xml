@@ -22,31 +22,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
-        android:id="@+id/fragments_layout_wrapper"
+    <fragment
+        android:id="@+id/fragment_products_list"
+        android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <fragment
-            android:id="@+id/fragment_products_list"
-            android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            tools:layout="@layout/fragment_products_list" />
-
-        <fragment
-            android:id="@+id/fragment_product_details"
-            android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductDetails"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            tools:layout="@layout/fragment_product_details" />
-
-    </LinearLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout="@layout/fragment_products_list" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_new_product"
@@ -54,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add"
-        app:layout_anchor="@id/fragments_layout_wrapper"
+        app:layout_anchor="@id/fragment_products_list"
         app:layout_anchorGravity="end|bottom" />
 
 </android.support.design.widget.CoordinatorLayout>

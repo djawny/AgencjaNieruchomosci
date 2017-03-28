@@ -5,17 +5,21 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentProductsList.OnProductSelected{
 
+    public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
     public static final int ADD_PRODUCT_REQUEST_CODE = 1;
 
     @BindView(R.id.toolbar)
@@ -52,5 +56,13 @@ public class MainActivity extends AppCompatActivity {
     public void onAddProductClicked(View view) {
         Intent intent = new Intent(this, AddProductActivity.class);
         mFragmentProductList.startActivityForResult(intent, ADD_PRODUCT_REQUEST_CODE);
+    }
+
+    @Override
+    public void onProductSelected(Product product) {
+        Intent intent = new Intent(this, ProductDetailsActivity.class);
+        intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
+        startActivity(intent);
+        Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
     }
 }
