@@ -61,7 +61,12 @@ public class FragmentProductDetails extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = getActivity().getIntent().getExtras();
-        int productId = bundle.getInt(INTENT_PRODUCT_ID, Product.UNDEFINED);
+        int productId;
+        if (bundle != null) {
+            productId = bundle.getInt(INTENT_PRODUCT_ID, Product.UNDEFINED);
+        } else {
+            productId = Product.UNDEFINED;
+        }
         if (productId != Product.UNDEFINED) {
             disposableObserver = mProductRepository
                     .rxGetProduct(productId)
