@@ -81,7 +81,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
                         .rxGetProducts()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::swapData, this::handleError));
+                        .subscribe(this::displayProducts, this::handleProductRepositoryError));
             }
         }
     }
@@ -119,21 +119,19 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
                 .rxGetProducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::setAdapter, this::handleError));
+                .subscribe(this::displayProducts, this::handleProductRepositoryError));
     }
 
-    private void setAdapter(List<Product> products) {
-        mProductAdapter = new ProductAdapter(getActivity(), products, this);
-        mRecycleView.setAdapter(mProductAdapter);
-    }
-
-    private void swapData(List<Product> products) {
-        if (mProductAdapter != null) {
+    private void displayProducts(List<Product> products) {
+        if (mProductAdapter == null) {
+            mProductAdapter = new ProductAdapter(getActivity(), products, this);
+            mRecycleView.setAdapter(mProductAdapter);
+        } else {
             mProductAdapter.swapData(products);
         }
     }
 
-    private void handleError(Throwable error) {
+    private void handleProductRepositoryError(Throwable error) {
         Log.d(TAG, error.getLocalizedMessage(), error);
     }
 

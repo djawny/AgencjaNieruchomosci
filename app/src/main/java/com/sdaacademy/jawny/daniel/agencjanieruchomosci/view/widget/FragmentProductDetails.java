@@ -49,7 +49,6 @@ public class FragmentProductDetails extends Fragment {
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private CompositeDisposable mCompositeDisposable;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,17 +70,8 @@ public class FragmentProductDetails extends Fragment {
                     .rxGetProduct(productId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::display, this::handleError));
+                    .subscribe(this::displayProductDetails, this::handleError));
         }
-    }
-
-    private void display(Product product) {
-        setDisplay(product);
-        setToolBar(product);
-    }
-
-    private void handleError(Throwable error) {
-        Log.d(TAG, error.getLocalizedMessage(), error);
     }
 
     @Override
@@ -92,14 +82,23 @@ public class FragmentProductDetails extends Fragment {
         }
     }
 
-    private void setDisplay(Product product) {
+    private void displayProductDetails(Product product) {
+        bindViews(product);
+        setToolbar(product);
+    }
+
+    private void handleError(Throwable error) {
+        Log.d(TAG, error.getLocalizedMessage(), error);
+    }
+
+    private void bindViews(Product product) {
         int drawableResourceId = this.getResources().getIdentifier(product.getmImageName(), "drawable", getActivity().getPackageName());
         mProductImage.setImageResource(drawableResourceId);
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
     }
 
-    private void setToolBar(Product product) {
+    private void setToolbar(Product product) {
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(product.getmName());
