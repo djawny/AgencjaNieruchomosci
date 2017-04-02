@@ -30,6 +30,11 @@ public class ProductRepository implements ProductRepositoryInterface {
         products.add(product2);
         products.add(product3);
 
+//        for (int i = 0; i < 1000; i++) {
+//            Product product = new Product(i, "dom" + String.valueOf(i), i, "d1");
+//            products.add(product);
+//        }
+
         mDatabase.saveProducts(products);
     }
 
@@ -39,7 +44,10 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public Observable<List<Product>> rxGetProducts() {
-        return Observable.defer(() -> Observable.just(mDatabase.getProducts()));
+        return Observable.defer(() -> {
+            Thread.sleep(3000);
+            return Observable.just(mDatabase.getProducts());
+        });
     }
 
     @Override
