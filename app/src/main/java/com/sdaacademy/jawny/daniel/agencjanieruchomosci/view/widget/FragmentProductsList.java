@@ -26,7 +26,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
@@ -48,7 +47,6 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
-    //    private DisposableObserver<List<Product>> disposableObserver;
     private CompositeDisposable mCompositeDisposable;
     private ProgressDialog progressDialog;
 
@@ -87,7 +85,6 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
             }
         }
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -130,14 +127,14 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         mRecycleView.setAdapter(mProductAdapter);
     }
 
-    private void handleError(Throwable error) {
-        Log.d(TAG, error.getLocalizedMessage(), error);
-    }
-
     private void swapData(List<Product> products) {
         if (mProductAdapter != null) {
             mProductAdapter.swapData(products);
         }
+    }
+
+    private void handleError(Throwable error) {
+        Log.d(TAG, error.getLocalizedMessage(), error);
     }
 
     private void setProgressBar(Activity activity) {

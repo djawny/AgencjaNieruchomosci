@@ -22,7 +22,7 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductReposi
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.INTENT_PRODUCT_ID;
@@ -47,7 +47,8 @@ public class FragmentProductDetails extends Fragment {
     TextView mProductPrice;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
-    private DisposableObserver<Product> disposableObserver;
+    private CompositeDisposable mCompositeDisposable;
+
 
     @Nullable
     @Override
@@ -60,37 +61,34 @@ public class FragmentProductDetails extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
         Bundle bundle = getActivity().getIntent().getExtras();
         int productId = bundle != null ? bundle.getInt(INTENT_PRODUCT_ID, Product.UNDEFINED) : Product.UNDEFINED;
         if (productId != Product.UNDEFINED) {
-            disposableObserver = mProductRepository
+            mCompositeDisposable.add(mProductRepository
                     .rxGetProduct(productId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableObserver<Product>() {
-                        @Override
-                        public void onNext(Product product) {
-                            setDisplay(product);
-                            setToolBar(product);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            Log.d(TAG, e.getMessage(), e);
-                        }
-
-                        @Override
-                        public void onComplete() {
-                        }
-                    });
+                    .subscribe(this::display, this::handleError));
         }
+    }
+
+    private void display(Product product) {
+        setDisplay(product);
+        setToolBar(product);
+    }
+
+    private void handleError(Throwable error) {
+        Log.d(TAG, error.getLocalizedMessage(), error);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (disposableObserver != null && !disposableObserver.isDisposed()) {
-            disposableObserver.dispose();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
         }
     }
 
