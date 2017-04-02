@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
 
     private void setupToolBar() {
         setSupportActionBar(mToolbar);
-        mToolbar.setTitle("Nieruchomości");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
