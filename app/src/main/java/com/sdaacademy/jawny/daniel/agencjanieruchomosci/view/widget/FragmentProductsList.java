@@ -48,7 +48,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
     private CompositeDisposable mCompositeDisposable;
-    private ProgressDialog progressDialog;
+    private ProgressDialog mProgressDialog;
 
     @Nullable
     @Override
@@ -64,6 +64,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
+        setProgressBar(getActivity());
         setRecycleView();
     }
 
@@ -77,6 +78,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_PRODUCT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                mProgressDialog.show();
                 mCompositeDisposable.add(mProductRepository
                         .rxGetProducts()
                         .subscribeOn(Schedulers.io())
@@ -115,6 +117,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
+        mProgressDialog.show();
         mCompositeDisposable.add(mProductRepository
                 .rxGetProducts()
                 .subscribeOn(Schedulers.io())
@@ -129,16 +132,22 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         } else {
             mProductAdapter.swapData(products);
         }
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     private void handleProductRepositoryError(Throwable error) {
         Log.d(TAG, error.getLocalizedMessage(), error);
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     private void setProgressBar(Activity activity) {
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.setTitle("Please Wait...");
-        progressDialog.setMessage("Loading data...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog = new ProgressDialog(activity);
+        mProgressDialog.setTitle("Please Wait...");
+        mProgressDialog.setMessage("Loading data...");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 }

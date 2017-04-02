@@ -70,7 +70,7 @@ public class FragmentProductDetails extends Fragment {
                     .rxGetProduct(productId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::displayProductDetails, this::handleError));
+                    .subscribe(this::displayProductDetails, this::handleProductRepositoryError));
         }
     }
 
@@ -87,7 +87,7 @@ public class FragmentProductDetails extends Fragment {
         setToolbar(product);
     }
 
-    private void handleError(Throwable error) {
+    private void handleProductRepositoryError(Throwable error) {
         Log.d(TAG, error.getLocalizedMessage(), error);
     }
 
