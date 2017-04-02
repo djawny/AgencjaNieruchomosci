@@ -1,5 +1,7 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,15 +37,16 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
-
     public interface OnProductSelectedListener {
+
         void onProductSelected(Product product);
     }
-
     private OnProductSelectedListener mListener;
+
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
     private DisposableObserver<List<Product>> disposableObserver;
+    private ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -143,5 +146,12 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
                     public void onComplete() {
                     }
                 });
+    }
+
+    private void setProgressBar(Activity activity) {
+        progressDialog = new ProgressDialog(activity);
+        progressDialog.setTitle("Please Wait...");
+        progressDialog.setMessage("Loading data...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 }
