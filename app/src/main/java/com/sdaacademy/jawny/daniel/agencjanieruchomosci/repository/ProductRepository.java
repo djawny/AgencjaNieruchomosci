@@ -45,7 +45,7 @@ public class ProductRepository implements ProductRepositoryInterface {
     @Override
     public Observable<List<Product>> rxGetProducts() {
         return Observable.defer(() -> {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             return Observable.just(mDatabase.getProducts());
         });
     }
