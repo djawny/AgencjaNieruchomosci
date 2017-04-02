@@ -25,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -37,15 +38,18 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
+
     public interface OnProductSelectedListener {
 
         void onProductSelected(Product product);
     }
+
     private OnProductSelectedListener mListener;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private ProductAdapter mProductAdapter;
-    private DisposableObserver<List<Product>> disposableObserver;
+    //    private DisposableObserver<List<Product>> disposableObserver;
+    private CompositeDisposable mCompositeDisposable;
     private ProgressDialog progressDialog;
 
     @Nullable
@@ -59,6 +63,9 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
         setRecycleView();
     }
 
@@ -72,30 +79,15 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_PRODUCT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                disposableObserver = mProductRepository
+                mCompositeDisposable.add(mProductRepository
                         .rxGetProducts()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableObserver<List<Product>>() {
-                            @Override
-                            public void onNext(List<Product> products) {
-                                if (mProductAdapter != null) {
-                                    mProductAdapter.swapData(products);
-                                }
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                Log.d(TAG, e.getMessage(), e);
-                            }
-
-                            @Override
-                            public void onComplete() {
-                            }
-                        });
+                        .subscribe(this::swapData, this::handleError));
             }
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -116,8 +108,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (disposableObserver != null && !disposableObserver.isDisposed()) {
-            disposableObserver.dispose();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
         }
     }
 
@@ -126,26 +118,26 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleView.setLayoutManager(linearLayoutManager);
-        disposableObserver = mProductRepository
+        mCompositeDisposable.add(mProductRepository
                 .rxGetProducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<List<Product>>() {
-                    @Override
-                    public void onNext(List<Product> products) {
-                        mProductAdapter = new ProductAdapter(getActivity(), products, FragmentProductsList.this);
-                        mRecycleView.setAdapter(mProductAdapter);
-                    }
+                .subscribe(this::setAdapter, this::handleError));
+    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, e.getMessage(), e);
-                    }
+    private void setAdapter(List<Product> products) {
+        mProductAdapter = new ProductAdapter(getActivity(), products, this);
+        mRecycleView.setAdapter(mProductAdapter);
+    }
 
-                    @Override
-                    public void onComplete() {
-                    }
-                });
+    private void handleError(Throwable error) {
+        Log.d(TAG, error.getLocalizedMessage(), error);
+    }
+
+    private void swapData(List<Product> products) {
+        if (mProductAdapter != null) {
+            mProductAdapter.swapData(products);
+        }
     }
 
     private void setProgressBar(Activity activity) {

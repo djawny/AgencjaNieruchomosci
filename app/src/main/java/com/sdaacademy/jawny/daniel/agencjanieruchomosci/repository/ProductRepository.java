@@ -6,8 +6,10 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 
 public class ProductRepository implements ProductRepositoryInterface {
 
@@ -37,12 +39,12 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public Observable<List<Product>> rxGetProducts() {
-        return Observable.just(mDatabase.getProducts());
+        return Observable.defer(() -> Observable.just(mDatabase.getProducts()));
     }
 
     @Override
     public Observable<Product> rxGetProduct(int id) {
-        return Observable.just(mDatabase.getProduct(id));
+        return Observable.defer(() -> Observable.just(mDatabase.getProduct(id)));
     }
 
     @Override
