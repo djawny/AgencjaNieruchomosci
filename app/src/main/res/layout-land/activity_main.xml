@@ -39,7 +39,7 @@
             tools:layout="@layout/fragment_products_list" />
 
         <fragment
-            android:id="@+id/fragment_product_details"
+            android:id="@+id/fragment_product_details_land"
             android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductDetails"
             android:layout_width="0dp"
             android:layout_height="match_parent"

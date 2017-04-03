@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
     Toolbar mToolbar;
 
     Fragment mFragmentProductList;
+    Fragment mFragmentProductDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
         ButterKnife.bind(this);
         setupToolBar();
         mFragmentProductList = getSupportFragmentManager().findFragmentById(R.id.fragment_products_list);
+        mFragmentProductDetails = getSupportFragmentManager().findFragmentById(R.id.fragment_product_details_land);
+        Log.d("tag", String.valueOf(mFragmentProductDetails));
     }
 
     @Override
@@ -63,5 +66,11 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
         intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
         startActivity(intent);
         Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFragmentProductDetails = null;
     }
 }
