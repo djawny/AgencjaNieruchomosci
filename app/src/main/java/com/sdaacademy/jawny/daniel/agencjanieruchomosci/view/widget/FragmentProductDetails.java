@@ -107,7 +107,12 @@ public class FragmentProductDetails extends Fragment {
         collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
     }
 
-    public void updateProductDetails(Product product) {
+    public void update(Product product) {
         displayProductDetails(product);
+        updateToolbar();
+    }
+
+    private void updateToolbar() {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 }
