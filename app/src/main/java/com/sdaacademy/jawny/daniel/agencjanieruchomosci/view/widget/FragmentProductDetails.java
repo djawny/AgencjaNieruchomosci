@@ -40,9 +40,6 @@ public class FragmentProductDetails extends Fragment {
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout collapsingToolbarLayout;
 
-    @BindView(R.id.product_name)
-    TextView mProductName;
-
     @BindView(R.id.product_price)
     TextView mProductPrice;
 
@@ -94,11 +91,11 @@ public class FragmentProductDetails extends Fragment {
     private void bindViews(Product product) {
         int drawableResourceId = this.getResources().getIdentifier(product.getmImageName(), "drawable", getActivity().getPackageName());
         mProductImage.setImageResource(drawableResourceId);
-        mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
     }
 
     private void setToolbar(Product product) {
+        mToolbar.setTitle("");
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle(product.getmName());

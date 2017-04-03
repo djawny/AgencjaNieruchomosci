@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
             android:layout_margin="8dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/primary"
             android:text="Dodaj"
             android:textColor="@android:color/white" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
             android:layout_margin="8dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/primary"
             android:text="Anuluj"
             android:textColor="@android:color/white" />
 
