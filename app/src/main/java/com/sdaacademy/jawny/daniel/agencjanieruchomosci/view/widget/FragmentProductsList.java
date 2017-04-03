@@ -61,9 +61,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
+        setmCompositeDisposable();
         setProgressBar(getActivity());
         setRecycleView();
     }
@@ -80,7 +78,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
             if (resultCode == RESULT_OK) {
                 mProgressDialog.show();
                 mCompositeDisposable.add(mProductRepository
-                        .rxGetProducts()
+                        .getProductsObservable()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::displayProducts, this::handleProductRepositoryError));
@@ -112,6 +110,12 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         }
     }
 
+    private void setmCompositeDisposable() {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+    }
+
     private void setRecycleView() {
         mRecycleView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -119,13 +123,14 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         mRecycleView.setLayoutManager(linearLayoutManager);
         mProgressDialog.show();
         mCompositeDisposable.add(mProductRepository
-                .rxGetProducts()
+                .getProductsObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::displayProducts, this::handleProductRepositoryError));
     }
 
     private void displayProducts(List<Product> products) {
+        mListener.onProductReady(products);
         if (mProductAdapter == null) {
             mProductAdapter = new ProductAdapter(getActivity(), products, this);
             mRecycleView.setAdapter(mProductAdapter);

@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
             startActivity(intent);
             Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
         } else {
-            fragment.update(product);
+            fragment.updateProductDetails(product);
         }
     }
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
     public void onProductReady(List<Product> products) {
         FragmentProductDetails fragmentProductDetails = getFragmentProductDetails();
         if (fragmentProductDetails != null && !products.isEmpty()) {
-            fragmentProductDetails.update(products.get(0));
+            fragmentProductDetails.updateProductDetails(products.get(0));
         }
     }
 

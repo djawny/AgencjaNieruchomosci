@@ -46,14 +46,6 @@ public class FragmentProductDetails extends Fragment {
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private CompositeDisposable mCompositeDisposable;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,19 +55,14 @@ public class FragmentProductDetails extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setmCompositeDisposable();
         Bundle bundle = getActivity().getIntent().getExtras();
         int productId = bundle != null ? bundle.getInt(PRODUCT_ID, Product.UNDEFINED) : Product.UNDEFINED;
         if (productId != Product.UNDEFINED) {
             mCompositeDisposable.add(mProductRepository
-                    .rxGetProduct(productId)
+                    .getProductObservable(productId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::displayProductDetails, this::handleProductRepositoryError));
@@ -87,6 +74,12 @@ public class FragmentProductDetails extends Fragment {
         super.onDestroy();
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
+        }
+    }
+
+    private void setmCompositeDisposable() {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
         }
     }
 
@@ -114,7 +107,7 @@ public class FragmentProductDetails extends Fragment {
         collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
     }
 
-    public void update(Product product) {
+    public void updateProductDetails(Product product) {
         displayProductDetails(product);
     }
 }

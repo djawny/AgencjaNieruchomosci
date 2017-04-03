@@ -43,7 +43,7 @@ public class ProductRepository implements ProductRepositoryInterface {
     }
 
     @Override
-    public Observable<List<Product>> rxGetProducts() {
+    public Observable<List<Product>> getProductsObservable() {
         return Observable.defer(() -> {
             Thread.sleep(2000);
             return Observable.just(mDatabase.getProducts());
@@ -51,7 +51,7 @@ public class ProductRepository implements ProductRepositoryInterface {
     }
 
     @Override
-    public Observable<Product> rxGetProduct(int id) {
+    public Observable<Product> getProductObservable(int id) {
         return Observable.defer(() -> Observable.just(mDatabase.getProduct(id)));
     }
 
