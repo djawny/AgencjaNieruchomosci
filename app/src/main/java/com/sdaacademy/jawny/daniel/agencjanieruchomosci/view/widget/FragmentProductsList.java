@@ -39,8 +39,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     RecyclerView mRecycleView;
 
     public interface OnProductSelectedListener {
-
         void onProductSelected(Product product);
+        void onProductReady(List<Product> products);
     }
 
     private OnProductSelectedListener mListener;

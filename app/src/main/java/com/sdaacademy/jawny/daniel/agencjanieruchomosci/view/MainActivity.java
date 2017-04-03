@@ -2,7 +2,6 @@ package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,6 +12,8 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductDetails;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
         ButterKnife.bind(this);
         setupToolBar();
         mFragmentProductList = (FragmentProductsList) getSupportFragmentManager().findFragmentById(R.id.fragment_products_list);
-        Log.d("tag", String.valueOf(getmFragmentProductDetails()));
+        Log.d("tag", String.valueOf(getFragmentProductDetails()));
     }
 
     @Override
@@ -61,21 +62,26 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
 
     @Override
     public void onProductSelected(Product product) {
-        FragmentProductDetails fragment = (FragmentProductDetails) getmFragmentProductDetails();
+        FragmentProductDetails fragment = getFragmentProductDetails();
         if (fragment == null) {
             Intent intent = new Intent(this, ProductDetailsActivity.class);
             intent.putExtra(PRODUCT_ID, product.getmId());
             startActivity(intent);
             Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
         } else {
-//            Bundle args = new Bundle();
-//            args.putInt(PRODUCT_ID, product.getmId());
-//            fragment.setArguments(args);
             fragment.update(product);
         }
     }
 
-    public Fragment getmFragmentProductDetails() {
+    @Override
+    public void onProductReady(List<Product> products) {
+        FragmentProductDetails fragmentProductDetails = getFragmentProductDetails();
+        if (fragmentProductDetails != null && !products.isEmpty()) {
+            fragmentProductDetails.update(products.get(0));
+        }
+    }
+
+    public FragmentProductDetails getFragmentProductDetails() {
         final FragmentProductDetails fragment = (FragmentProductDetails) getSupportFragmentManager().findFragmentById(R.id.fragment_product_details_land);
         if (fragment != null && !fragment.isAdded()) {
             return null;
