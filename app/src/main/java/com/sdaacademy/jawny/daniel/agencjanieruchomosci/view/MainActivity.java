@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductDetails;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList;
 
 import butterknife.BindView;
@@ -25,8 +26,7 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    Fragment mFragmentProductList;
-    Fragment mFragmentProductDetails;
+    FragmentProductsList mFragmentProductList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupToolBar();
-        mFragmentProductList = getSupportFragmentManager().findFragmentById(R.id.fragment_products_list);
-        mFragmentProductDetails = getSupportFragmentManager().findFragmentById(R.id.fragment_product_details_land);
-        Log.d("tag", String.valueOf(mFragmentProductDetails));
+        mFragmentProductList = (FragmentProductsList) getSupportFragmentManager().findFragmentById(R.id.fragment_products_list);
+        Log.d("tag", String.valueOf(getmFragmentProductDetails()));
     }
 
     @Override
@@ -62,15 +61,19 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
 
     @Override
     public void onProductSelected(Product product) {
-        Intent intent = new Intent(this, ProductDetailsActivity.class);
-        intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
-        startActivity(intent);
-        Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+        if (getmFragmentProductDetails() == null) {
+            Intent intent = new Intent(this, ProductDetailsActivity.class);
+            intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
+            startActivity(intent);
+            Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+        }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mFragmentProductDetails = null;
+    public Fragment getmFragmentProductDetails() {
+        final FragmentProductDetails fragment = (FragmentProductDetails) getSupportFragmentManager().findFragmentById(R.id.fragment_product_details_land);
+        if (fragment != null && !fragment.isAdded()) {
+            return null;
+        }
+        return fragment;
     }
 }
