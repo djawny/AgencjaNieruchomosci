@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:bottom="120dp"
-        android:drawable="@drawable/ic_home_24dp"
-        android:top="120dp" />
+    <item android:drawable="@drawable/ic_home_24dp" />
 
 </layer-list>
