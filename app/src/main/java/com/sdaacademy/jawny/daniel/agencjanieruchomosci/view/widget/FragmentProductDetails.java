@@ -25,7 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.INTENT_PRODUCT_ID;
+import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.PRODUCT_ID;
 
 public class FragmentProductDetails extends Fragment {
 
@@ -46,6 +46,14 @@ public class FragmentProductDetails extends Fragment {
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
     private CompositeDisposable mCompositeDisposable;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,13 +63,16 @@ public class FragmentProductDetails extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
         Bundle bundle = getActivity().getIntent().getExtras();
-        int productId = bundle != null ? bundle.getInt(INTENT_PRODUCT_ID, Product.UNDEFINED) : Product.UNDEFINED;
+        int productId = bundle != null ? bundle.getInt(PRODUCT_ID, Product.UNDEFINED) : Product.UNDEFINED;
         if (productId != Product.UNDEFINED) {
             mCompositeDisposable.add(mProductRepository
                     .rxGetProduct(productId)
@@ -101,5 +112,9 @@ public class FragmentProductDetails extends Fragment {
         collapsingToolbarLayout.setTitle(product.getmName());
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
+    }
+
+    public void update(Product product) {
+        displayProductDetails(product);
     }
 }

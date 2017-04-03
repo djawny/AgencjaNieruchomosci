@@ -20,7 +20,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements FragmentProductsList.OnProductSelectedListener {
 
-    public static final String INTENT_PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
+    public static final String PRODUCT_ID = ProductDetailsActivity.class.getSimpleName() + "productId";
     public static final int ADD_PRODUCT_REQUEST_CODE = 1;
 
     @BindView(R.id.toolbar)
@@ -61,11 +61,17 @@ public class MainActivity extends AppCompatActivity implements FragmentProductsL
 
     @Override
     public void onProductSelected(Product product) {
-        if (getmFragmentProductDetails() == null) {
+        FragmentProductDetails fragment = (FragmentProductDetails) getmFragmentProductDetails();
+        if (fragment == null) {
             Intent intent = new Intent(this, ProductDetailsActivity.class);
-            intent.putExtra(INTENT_PRODUCT_ID, product.getmId());
+            intent.putExtra(PRODUCT_ID, product.getmId());
             startActivity(intent);
             Log.d(getClass().getSimpleName(), "Product clicked " + product.getmName());
+        } else {
+//            Bundle args = new Bundle();
+//            args.putInt(PRODUCT_ID, product.getmId());
+//            fragment.setArguments(args);
+            fragment.update(product);
         }
     }
 
