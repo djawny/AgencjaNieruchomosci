@@ -40,6 +40,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
     public interface OnProductSelectedListener {
         void onProductSelected(Product product);
+
         void onProductReady(List<Product> products);
     }
 
@@ -61,7 +62,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setmCompositeDisposable();
+        configureDisposable();
         setProgressBar(getActivity());
         setRecycleView();
     }
@@ -78,7 +79,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
             if (resultCode == RESULT_OK) {
                 mProgressDialog.show();
                 mCompositeDisposable.add(mProductRepository
-                        .getProductsObservable()
+                        .getProductsStream()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::displayProducts, this::handleProductRepositoryError));
@@ -105,14 +106,18 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
+        disposeDisposable();
+    }
+
+    private void configureDisposable() {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
         }
     }
 
-    private void setmCompositeDisposable() {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
+    private void disposeDisposable() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
         }
     }
 
@@ -123,7 +128,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         mRecycleView.setLayoutManager(linearLayoutManager);
         mProgressDialog.show();
         mCompositeDisposable.add(mProductRepository
-                .getProductsObservable()
+                .getProductsStream()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::displayProducts, this::handleProductRepositoryError));

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 
 public class ProductRepository implements ProductRepositoryInterface {
 
@@ -43,20 +42,26 @@ public class ProductRepository implements ProductRepositoryInterface {
     }
 
     @Override
-    public Observable<List<Product>> getProductsObservable() {
-        return Observable.defer(() -> {
+    public Observable<List<Product>> getProductsStream() {
+        return Observable.fromCallable(() -> {
             Thread.sleep(2000);
-            return Observable.just(mDatabase.getProducts());
+            return mDatabase.getProducts();
         });
     }
 
     @Override
-    public Observable<Product> getProductObservable(int id) {
-        return Observable.defer(() -> Observable.just(mDatabase.getProduct(id)));
+    public Observable<Product> getProductStream(int id) {
+        return Observable.fromCallable(() -> mDatabase.getProduct(id));
     }
 
     @Override
-    public void addProduct(String name, int price) {
-        mDatabase.saveProduct(name, price);
+    public Observable<Void> addProductStream(String name, int price) {
+        return Observable.fromCallable(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                mDatabase.saveProduct(name, price);
+                return null;
+            }
+        });
     }
 }

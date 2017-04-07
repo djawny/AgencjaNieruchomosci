@@ -57,12 +57,12 @@ public class FragmentProductDetails extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setmCompositeDisposable();
+        configureDisposable();
         Bundle bundle = getActivity().getIntent().getExtras();
         int productId = bundle != null ? bundle.getInt(PRODUCT_ID, Product.UNDEFINED) : Product.UNDEFINED;
         if (productId != Product.UNDEFINED) {
             mCompositeDisposable.add(mProductRepository
-                    .getProductObservable(productId)
+                    .getProductStream(productId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::displayProductDetails, this::handleProductRepositoryError));
@@ -72,12 +72,16 @@ public class FragmentProductDetails extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        disposeDisposable();
+    }
+
+    private void disposeDisposable() {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }
     }
 
-    private void setmCompositeDisposable() {
+    private void configureDisposable() {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
         }
