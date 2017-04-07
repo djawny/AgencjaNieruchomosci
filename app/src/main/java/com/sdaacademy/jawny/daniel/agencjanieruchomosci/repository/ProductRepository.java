@@ -1,6 +1,6 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository;
 
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.AndroidApplication;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.application.AndroidApplication;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.database.Database;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 

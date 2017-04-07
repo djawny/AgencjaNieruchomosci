@@ -1,4 +1,4 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -18,7 +18,7 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter.ProductAdapter;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.adapter.ProductAdapter;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
-import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.ADD_PRODUCT_REQUEST_CODE;
+import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.MainActivity.ADD_PRODUCT_REQUEST_CODE;
 
 public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductClickedListener {
 

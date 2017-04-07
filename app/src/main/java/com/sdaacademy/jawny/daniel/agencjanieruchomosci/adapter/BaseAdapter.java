@@ -1,4 +1,4 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

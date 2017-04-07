@@ -1,4 +1,4 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity.PRODUCT_ID;
+import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.MainActivity.PRODUCT_ID;
 
 public class FragmentProductDetails extends Fragment {
 

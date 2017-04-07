@@ -1,4 +1,4 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

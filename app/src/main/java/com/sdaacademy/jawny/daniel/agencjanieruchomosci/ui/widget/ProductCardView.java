@@ -1,9 +1,8 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.widget;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 

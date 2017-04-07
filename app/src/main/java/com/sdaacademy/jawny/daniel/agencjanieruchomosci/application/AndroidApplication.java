@@ -1,4 +1,4 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.application;
 
 import android.app.Application;
 

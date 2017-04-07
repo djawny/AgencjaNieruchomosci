@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.MainActivity">
+    tools:context="com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
 
         <fragment
             android:id="@+id/fragment_products_list"
-            android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList"
+            android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.FragmentProductsList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -40,7 +40,7 @@
 
         <fragment
             android:id="@+id/fragment_product_details_land"
-            android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductDetails"
+            android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.FragmentProductDetails"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"

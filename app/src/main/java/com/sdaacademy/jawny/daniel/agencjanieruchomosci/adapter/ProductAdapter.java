@@ -1,4 +1,4 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.adapter;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.ProductCardView;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.widget.ProductCardView;
 
 import java.util.List;
 

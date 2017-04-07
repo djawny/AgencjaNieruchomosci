@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_product_details_land"
-        android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductDetails"
+        android:name="com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.FragmentProductDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_product_details" />

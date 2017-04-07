@@ -1,4 +1,4 @@
-package com.sdaacademy.jawny.daniel.agencjanieruchomosci.view;
+package com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,6 @@ import android.view.View;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductDetails;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.view.widget.FragmentProductsList;
 
 import java.util.List;
 
