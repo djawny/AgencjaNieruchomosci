@@ -76,6 +76,7 @@ public class AddProductActivity extends AppCompatActivity {
                         public void onComplete() {
                             Intent returnIntent = getIntent();
                             setResult(RESULT_OK, returnIntent);
+                            Toast.makeText(AddProductActivity.this, "Product added", Toast.LENGTH_LONG).show();
                             onBackPressed();
                         }
                     });
