@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 
 public class ProductRepository implements ProductRepositoryInterface {
 
@@ -53,11 +54,11 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public Observable<Void> addProductStream(String name, int price) {
-        return Observable.fromCallable(new Callable<Void>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Void>>() {
             @Override
-            public Void call() throws Exception {
+            public ObservableSource<? extends Void> call() throws Exception {
                 mDatabase.saveProduct(name, price);
-                return null;
+                return Observable.empty();
             }
         });
     }
