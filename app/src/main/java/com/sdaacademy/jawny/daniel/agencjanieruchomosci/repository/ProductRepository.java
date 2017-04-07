@@ -43,10 +43,7 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public Observable<List<Product>> getProductsStream() {
-        return Observable.fromCallable(() -> {
-            Thread.sleep(2000);
-            return mDatabase.getProducts();
-        });
+        return Observable.fromCallable(mDatabase::getProducts);
     }
 
     @Override

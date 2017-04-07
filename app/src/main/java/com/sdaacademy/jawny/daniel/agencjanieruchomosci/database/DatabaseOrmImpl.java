@@ -57,6 +57,11 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
 
     @Override
     public List<Product> getProducts() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return mProductDao.queryForAll();
     }
 

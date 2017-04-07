@@ -107,6 +107,13 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     public void onDestroy() {
         super.onDestroy();
         disposeDisposable();
+        dismissProgressDialog();
+    }
+
+    private void dismissProgressDialog() {
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 
     private void configureDisposable() {
@@ -142,16 +149,12 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         } else {
             mProductAdapter.swapData(products);
         }
-        if (mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
+        dismissProgressDialog();
     }
 
     private void handleProductRepositoryError(Throwable error) {
         Log.d(TAG, error.getLocalizedMessage(), error);
-        if (mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
+        dismissProgressDialog();
     }
 
     private void setProgressBar(Activity activity) {
