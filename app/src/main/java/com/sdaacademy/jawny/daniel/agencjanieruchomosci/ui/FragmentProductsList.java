@@ -13,12 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.adapter.ProductAdapter;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.adapter.ProductAdapter;
 
 import java.util.List;
 
@@ -37,6 +38,9 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
+
+    @BindView(R.id.status_info)
+    TextView mStatusInfo;
 
     public interface OnProductSelectedListener {
         void onProductSelected(Product product);
