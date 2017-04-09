@@ -145,8 +145,8 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
 
     private void setProgressBar(Activity activity) {
         mProgressDialog = new ProgressDialog(activity);
-        mProgressDialog.setTitle("Proszę czekać...");
-        mProgressDialog.setMessage("Wczytywanie danych...");
+        mProgressDialog.setTitle(getString(R.string.please_wait));
+        mProgressDialog.setMessage(getString(R.string.loading_data));
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
     }
 

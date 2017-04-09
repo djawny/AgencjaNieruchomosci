@@ -62,12 +62,12 @@ public class AddProductActivity extends AppCompatActivity implements AddProductV
     public void closeWindow() {
         Intent returnIntent = getIntent();
         setResult(RESULT_OK, returnIntent);
-        Toast.makeText(AddProductActivity.this, "Product added", Toast.LENGTH_LONG).show();
+        Toast.makeText(AddProductActivity.this, R.string.product_added, Toast.LENGTH_LONG).show();
         onBackPressed();
     }
 
     @Override
     public void showErrorInfo(Throwable error) {
-        Toast.makeText(AddProductActivity.this, "Error", Toast.LENGTH_LONG).show();
+        Toast.makeText(AddProductActivity.this, R.string.error, Toast.LENGTH_LONG).show();
     }
 }
