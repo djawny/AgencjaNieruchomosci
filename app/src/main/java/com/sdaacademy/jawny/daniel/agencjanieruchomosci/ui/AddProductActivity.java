@@ -41,7 +41,7 @@ public class AddProductActivity extends AppCompatActivity implements AddProductV
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        mPresenter.clearDisposible();
     }
 
     @OnClick(R.id.add_button)
