@@ -7,29 +7,25 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.MainActivity.PRODUCT_ID;
 
-public class FragmentProductDetails extends Fragment {
-
-    private static final String TAG = FragmentProductDetails.class.getSimpleName();
+public class FragmentProductDetails extends Fragment implements ProductDetailsView {
 
     @BindView(R.id.product_image)
     ImageView mProductImage;
@@ -43,8 +39,7 @@ public class FragmentProductDetails extends Fragment {
     @BindView(R.id.product_price)
     TextView mProductPrice;
 
-    private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
-    private CompositeDisposable mCompositeDisposable;
+    private ProductDetailsPresenter mPresenter;
 
     @Nullable
     @Override
@@ -57,43 +52,30 @@ public class FragmentProductDetails extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        configureDisposable();
+        mPresenter = new ProductDetailsPresenter(ProductRepository.getInstance(), Schedulers.io(), AndroidSchedulers.mainThread());
+        mPresenter.setView(this);
         Bundle bundle = getActivity().getIntent().getExtras();
         int productId = bundle != null ? bundle.getInt(PRODUCT_ID, Product.UNDEFINED) : Product.UNDEFINED;
         if (productId != Product.UNDEFINED) {
-            mCompositeDisposable.add(mProductRepository
-                    .getProductStream(productId)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::displayProductDetails, this::handleProductRepositoryError));
+            mPresenter.loadProduct(productId);
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        disposeDisposable();
+        mPresenter.clearDisposible();
     }
 
-    private void disposeDisposable() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
-        }
-    }
-
-    private void configureDisposable() {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-    }
-
-    private void displayProductDetails(Product product) {
+    @Override
+    public void showProductDetails(Product product) {
         bindViews(product);
         setToolbar(product);
     }
 
-    private void handleProductRepositoryError(Throwable error) {
-        Log.d(TAG, error.getLocalizedMessage(), error);
+    @Override
+    public void showErrorInfo(Throwable error) {
+        Toast.makeText(getActivity(), R.string.no_data, Toast.LENGTH_LONG).show();
     }
 
     private void bindViews(Product product) {
@@ -112,7 +94,7 @@ public class FragmentProductDetails extends Fragment {
     }
 
     public void update(Product product) {
-        displayProductDetails(product);
+        showProductDetails(product);
         updateToolbar();
     }
 
