@@ -43,6 +43,5 @@ public class ProductListPresenter extends BasePresenter<ProductListView> {
                     public void onComplete() {
                     }
                 }));
-
     }
 }

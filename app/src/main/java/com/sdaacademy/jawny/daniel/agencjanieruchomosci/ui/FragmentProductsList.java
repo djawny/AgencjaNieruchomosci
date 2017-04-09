@@ -31,8 +31,6 @@ import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.MainActivity.A
 
 public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductClickedListener, ProductListView {
 
-    private static final String TAG = FragmentProductsList.class.getSimpleName();
-
     @BindView(R.id.products_recycle_view)
     RecyclerView mRecycleView;
 
@@ -123,19 +121,19 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     }
 
     @Override
-    public void showErrorInfo(Throwable error) {
-        dismissProgressDialog();
-        mRecycleView.setVisibility(View.GONE);
-        mStatusInfo.setVisibility(View.VISIBLE);
-        mStatusInfo.setText(R.string.error);
-    }
-
-    @Override
     public void showNoDataInfo() {
         dismissProgressDialog();
         mRecycleView.setVisibility(View.GONE);
         mStatusInfo.setVisibility(View.VISIBLE);
         mStatusInfo.setText(R.string.no_data);
+    }
+
+    @Override
+    public void showErrorInfo(Throwable error) {
+        dismissProgressDialog();
+        mRecycleView.setVisibility(View.GONE);
+        mStatusInfo.setVisibility(View.VISIBLE);
+        mStatusInfo.setText(R.string.error);
     }
 
     private void setRecycleView() {

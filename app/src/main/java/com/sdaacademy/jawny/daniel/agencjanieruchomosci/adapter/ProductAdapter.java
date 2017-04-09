@@ -37,12 +37,7 @@ public class ProductAdapter extends BaseAdapter<Product> {
     public void onBind(RecyclerView.ViewHolder holder, final Product product, int position) {
         ((ProductViewHolder) holder).bind(product);
         if (mListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onProductClicked(product);
-                }
-            });
+            holder.itemView.setOnClickListener(v -> mListener.onProductClicked(product));
         }
     }
 
