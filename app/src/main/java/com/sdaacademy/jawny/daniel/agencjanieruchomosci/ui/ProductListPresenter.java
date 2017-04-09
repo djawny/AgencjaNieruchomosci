@@ -4,4 +4,6 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.base.BasePresenter;
 
 public class ProductListPresenter extends BasePresenter<ProductListView> {
 
+
+
 }

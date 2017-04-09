@@ -32,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 import static android.app.Activity.RESULT_OK;
 import static com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui.MainActivity.ADD_PRODUCT_REQUEST_CODE;
 
-public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductClickedListener {
+public class FragmentProductsList extends Fragment implements ProductAdapter.OnProductClickedListener, ProductListView {
 
     private static final String TAG = FragmentProductsList.class.getSimpleName();
 
@@ -43,18 +43,18 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     TextView mStatusInfo;
 
     public interface OnProductSelectedListener {
+
         void onProductSelected(Product product);
-
         void onProductReady(List<Product> products);
-    }
 
+    }
     private OnProductSelectedListener mListener;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
+
     private ProductAdapter mProductAdapter;
     private CompositeDisposable mCompositeDisposable;
     private ProgressDialog mProgressDialog;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -112,6 +112,21 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         super.onDestroy();
         disposeDisposable();
         dismissProgressDialog();
+    }
+
+    @Override
+    public void showProducts() {
+
+    }
+
+    @Override
+    public void showErrorInfo() {
+
+    }
+
+    @Override
+    public void showNoDataInfo() {
+
     }
 
     private void dismissProgressDialog() {
