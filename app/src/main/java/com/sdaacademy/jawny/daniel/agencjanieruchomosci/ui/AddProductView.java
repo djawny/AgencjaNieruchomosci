@@ -6,5 +6,5 @@ public interface AddProductView extends BaseView{
 
     void closeWindow();
 
-    void showErrorInfo();
+    void showErrorInfo(Throwable error);
 }

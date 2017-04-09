@@ -16,11 +16,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class AddProductActivity extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity implements AddProductView {
 
     @BindView(R.id.product_name)
     EditText mProductName;
@@ -28,28 +27,21 @@ public class AddProductActivity extends AppCompatActivity {
     @BindView(R.id.product_price)
     EditText mProductPrice;
 
-    private CompositeDisposable mCompositeDisposable;
-
-
-    private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
+    private AddProductPresenter mPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         ButterKnife.bind(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        configureDisposable();
+        mPresenter = new AddProductPresenter(ProductRepository.getInstance(), Schedulers.io(), AndroidSchedulers.mainThread());
+        mPresenter.setView(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        disposeDisposable();
+
     }
 
     @OnClick(R.id.add_button)
@@ -57,29 +49,7 @@ public class AddProductActivity extends AppCompatActivity {
         String name = mProductName.getText().toString().trim();
         String price = mProductPrice.getText().toString().trim();
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(price)) {
-            mProductRepository
-                    .addProductStream(name, Integer.parseInt(price))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableObserver<Void>() {
-                        @Override
-                        public void onNext(Void value) {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            Toast.makeText(AddProductActivity.this, "Error", Toast.LENGTH_LONG).show();
-                        }
-
-                        @Override
-                        public void onComplete() {
-                            Intent returnIntent = getIntent();
-                            setResult(RESULT_OK, returnIntent);
-                            Toast.makeText(AddProductActivity.this, "Product added", Toast.LENGTH_LONG).show();
-                            onBackPressed();
-                        }
-                    });
+            mPresenter.addProduct(name, price);
         }
     }
 
@@ -88,15 +58,16 @@ public class AddProductActivity extends AppCompatActivity {
         onBackPressed();
     }
 
-    private void configureDisposable() {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
+    @Override
+    public void closeWindow() {
+        Intent returnIntent = getIntent();
+        setResult(RESULT_OK, returnIntent);
+        Toast.makeText(AddProductActivity.this, "Product added", Toast.LENGTH_LONG).show();
+        onBackPressed();
     }
 
-    private void disposeDisposable() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
-        }
+    @Override
+    public void showErrorInfo(Throwable error) {
+        Toast.makeText(AddProductActivity.this, "Error", Toast.LENGTH_LONG).show();
     }
 }
