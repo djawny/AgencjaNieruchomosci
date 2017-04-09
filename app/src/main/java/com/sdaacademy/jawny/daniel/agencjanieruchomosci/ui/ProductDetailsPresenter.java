@@ -6,7 +6,6 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductReposi
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.util.Precondition;
 
 import io.reactivex.Scheduler;
-import io.reactivex.observers.DefaultObserver;
 import io.reactivex.observers.DisposableObserver;
 
 public class ProductDetailsPresenter extends BasePresenter<ProductDetailsView> {
