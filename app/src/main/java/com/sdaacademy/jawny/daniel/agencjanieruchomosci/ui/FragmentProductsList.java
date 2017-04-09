@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +18,12 @@ import com.sdaacademy.jawny.daniel.agencjanieruchomosci.R;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.adapter.ProductAdapter;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepository;
-import com.sdaacademy.jawny.daniel.agencjanieruchomosci.repository.ProductRepositoryInterface;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
@@ -45,16 +42,16 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     public interface OnProductSelectedListener {
 
         void onProductSelected(Product product);
+
         void onProductReady(List<Product> products);
 
     }
+
     private OnProductSelectedListener mListener;
-
-    private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
-
     private ProductAdapter mProductAdapter;
-    private CompositeDisposable mCompositeDisposable;
     private ProgressDialog mProgressDialog;
+    private ProductListPresenter mPresenter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,9 +63,12 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        configureDisposable();
+        mPresenter = new ProductListPresenter(ProductRepository.getInstance(), Schedulers.io(), AndroidSchedulers.mainThread());
+        mPresenter.setView(this);
         setProgressBar(getActivity());
         setRecycleView();
+        mProgressDialog.show();
+        mPresenter.loadProducts();
     }
 
     @Override
@@ -81,12 +81,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_PRODUCT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                mProgressDialog.show();
-                mCompositeDisposable.add(mProductRepository
-                        .getProductsStream()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::displayProducts, this::handleProductRepositoryError));
+                mPresenter.loadProducts();
             }
         }
     }
@@ -110,57 +105,14 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onDestroy() {
         super.onDestroy();
-        disposeDisposable();
+        mPresenter.clearDisposible();
+    }
+
+    @Override
+    public void showProducts(List<Product> products) {
         dismissProgressDialog();
-    }
-
-    @Override
-    public void showProducts() {
-
-    }
-
-    @Override
-    public void showErrorInfo() {
-
-    }
-
-    @Override
-    public void showNoDataInfo() {
-
-    }
-
-    private void dismissProgressDialog() {
-        if (mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    private void configureDisposable() {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-    }
-
-    private void disposeDisposable() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
-        }
-    }
-
-    private void setRecycleView() {
-        mRecycleView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecycleView.setLayoutManager(linearLayoutManager);
-        mProgressDialog.show();
-        mCompositeDisposable.add(mProductRepository
-                .getProductsStream()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::displayProducts, this::handleProductRepositoryError));
-    }
-
-    private void displayProducts(List<Product> products) {
+        mRecycleView.setVisibility(View.VISIBLE);
+        mStatusInfo.setVisibility(View.GONE);
         mListener.onProductReady(products);
         if (mProductAdapter == null) {
             mProductAdapter = new ProductAdapter(getActivity(), products, this);
@@ -168,12 +120,29 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         } else {
             mProductAdapter.swapData(products);
         }
-        dismissProgressDialog();
     }
 
-    private void handleProductRepositoryError(Throwable error) {
-        Log.d(TAG, error.getLocalizedMessage(), error);
+    @Override
+    public void showErrorInfo(Throwable error) {
         dismissProgressDialog();
+        mRecycleView.setVisibility(View.GONE);
+        mStatusInfo.setVisibility(View.VISIBLE);
+        mStatusInfo.setText(R.string.error);
+    }
+
+    @Override
+    public void showNoDataInfo() {
+        dismissProgressDialog();
+        mRecycleView.setVisibility(View.GONE);
+        mStatusInfo.setVisibility(View.VISIBLE);
+        mStatusInfo.setText(R.string.no_data);
+    }
+
+    private void setRecycleView() {
+        mRecycleView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycleView.setLayoutManager(linearLayoutManager);
     }
 
     private void setProgressBar(Activity activity) {
@@ -181,5 +150,11 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         mProgressDialog.setTitle("Proszę czekać...");
         mProgressDialog.setMessage("Wczytywanie danych...");
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+    }
+
+    private void dismissProgressDialog() {
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 }

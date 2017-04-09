@@ -1,12 +1,15 @@
 package com.sdaacademy.jawny.daniel.agencjanieruchomosci.ui;
 
 import com.sdaacademy.jawny.daniel.agencjanieruchomosci.base.BaseView;
+import com.sdaacademy.jawny.daniel.agencjanieruchomosci.model.Product;
 
-interface ProductListView extends BaseView{
+import java.util.List;
 
-    void showProducts();
+interface ProductListView extends BaseView {
 
-    void showErrorInfo();
+    void showProducts(List<Product> products);
+
+    void showErrorInfo(Throwable error);
 
     void showNoDataInfo();
 }

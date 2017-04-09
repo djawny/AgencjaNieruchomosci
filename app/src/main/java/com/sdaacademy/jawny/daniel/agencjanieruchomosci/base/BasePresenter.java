@@ -11,6 +11,11 @@ public abstract class BasePresenter<V extends BaseView> {
     protected Scheduler mObserveScheduler;
     protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
+    public BasePresenter(Scheduler subscriber, Scheduler observer) {
+        mSubscribeScheduler = subscriber;
+        mObserveScheduler = observer;
+    }
+
     public V getView() {
         return mView;
     }
