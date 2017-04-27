@@ -42,7 +42,6 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
         void onProductSelected(Product product);
 
         void onProductReady(List<Product> products);
-
     }
 
     private OnProductSelectedListener mListener;
@@ -144,7 +143,11 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     }
 
     private void setProgressBar(Activity activity) {
-        mProgressDialog = new ProgressDialog(activity);
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(activity);
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setCancelable(false);
+        }
         mProgressDialog.setTitle(getString(R.string.please_wait));
         mProgressDialog.setMessage(getString(R.string.loading_data));
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
