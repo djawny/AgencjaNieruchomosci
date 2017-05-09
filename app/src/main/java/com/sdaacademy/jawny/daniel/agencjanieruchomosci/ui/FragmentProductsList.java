@@ -102,7 +102,7 @@ public class FragmentProductsList extends Fragment implements ProductAdapter.OnP
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.clearDisposible();
+        mPresenter.clearDisposable();
     }
 
     @Override

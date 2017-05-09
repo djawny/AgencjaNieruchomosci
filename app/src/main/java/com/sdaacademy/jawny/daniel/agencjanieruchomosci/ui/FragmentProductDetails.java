@@ -64,7 +64,7 @@ public class FragmentProductDetails extends Fragment implements ProductDetailsVi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.clearDisposible();
+        mPresenter.clearDisposable();
     }
 
     @Override
